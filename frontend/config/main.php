@@ -35,6 +35,7 @@ return [
 		    'class' => 'yii\web\UrlManager',
 		    'enablePrettyUrl' => true,
 		    'showScriptName' => false,
+//		    'enableStrictParsing' => true,
 		    'rules' => require_once('routes.php'),
 	    ],
     ],

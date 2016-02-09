@@ -89,3 +89,29 @@ a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
+
+.navigation {
+	margin-bottom: 15px;
+}
+
+.navigation a {
+	font-size: 16px;
+}
+
+.navbar-brand {
+	width: 44px;
+	height: 44px;
+	background: url('/img/rsz_logo_mts.png') no-repeat;
+	padding: 0;
+	margin-top: 2px;
+}
+
+
+.in-bm {
+	color: #5ab169;
+	font-size: 16px;
+}
+.non-bm {
+	color: #b14d52;
+	font-size: 16px;
+}

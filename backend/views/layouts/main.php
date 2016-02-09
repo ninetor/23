@@ -7,6 +7,7 @@ use backend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 
@@ -28,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => '',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -54,6 +55,13 @@ AppAsset::register($this);
     ?>
 
     <div class="container">
+	    <div class="navigation">
+		    <?= Html::a('Activities', Url::toRoute(['activity/index']))?>
+		    <?= Html::a('Participants', Url::toRoute(['participant/index']))?>
+		    <?= Html::a('Winners', Url::toRoute(['winner/index']))?>
+		    <?= Html::a('Gifts', Url::toRoute(['gift/index']))?>
+	    </div>
+
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>

@@ -55,16 +55,18 @@ AppAsset::register($this);
     ?>
 
     <div class="container">
-	    <div class="navigation">
-		    <?= Html::a('Activities', Url::toRoute(['activity/index']))?>
-		    <?= Html::a('Participants', Url::toRoute(['participant/index']))?>
-		    <?= Html::a('Winners', Url::toRoute(['winner/index']))?>
-		    <?= Html::a('Gifts', Url::toRoute(['gift/index']))?>
-	    </div>
+	    <?php if(!Yii::$app->user->isGuest) { ?>
+		    <div class="navigation">
+			    <?= Html::a('Activities', Url::toRoute(['activity/index']))?>
+			    <?= Html::a('Participants', Url::toRoute(['participant/index']))?>
+			    <?= Html::a('Winners', Url::toRoute(['winner/index']))?>
+			    <?= Html::a('Gifts', Url::toRoute(['gift/index']))?>
+		    </div>
+		    <?= Breadcrumbs::widget([
+			    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+		    ]) ?>
+	    <?php } ?>
 
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>

@@ -28,6 +28,15 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+	    'request' => [
+		    'baseUrl' => '',
+	    ],
+	    'urlManager' => [
+		    'class' => 'yii\web\UrlManager',
+		    'enablePrettyUrl' => true,
+		    'showScriptName' => false,
+		    'rules' => require_once('routes.php'),
+	    ],
     ],
     'params' => $params,
 ];

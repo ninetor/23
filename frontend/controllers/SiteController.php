@@ -83,8 +83,8 @@ class SiteController extends Controller
 			'exceptions' => 1,
 			'soap_version' => SOAP_1_2,
 		]);
-		var_dump(extension_loaded('soap'));die;
+//		var_dump(extension_loaded('soap'));die;
 		$result = $client->InvokeMethod();
-		var_dump($result);die;
+		echo json_encode($result);die;
 	}
 }

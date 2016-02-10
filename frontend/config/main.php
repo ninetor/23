@@ -12,6 +12,13 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+	    'assetManager' => [
+		    'bundles' => [
+			    'yii\bootstrap\BootstrapAsset' => [
+				    'css' => []
+			    ],
+		    ],
+	    ],
 	    'errorHandler' => [
 		    'errorAction' => 'site/error',
 	    ],

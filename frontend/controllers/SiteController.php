@@ -71,6 +71,20 @@ class SiteController extends Controller
 
 
 	public function actionSoap () {
-//		$soap = new SoapClient();
+//		phpinfo();die;
+		ini_set('soap.wsdl_cache_enabled',0);
+		ini_set('soap.wsdl_cache_ttl',0);
+		ini_set('default_socket_timeout', 300);
+		ini_set('connection_timeout', 300);
+
+		$wsdl = Yii::getAlias('@frontend').'/'.Yii::$app->params['wsdl'];
+		$client = new SoapClient($wsdl, [
+			'cache_wsdl' => WSDL_CACHE_NONE,
+			'exceptions' => 1,
+			'soap_version' => SOAP_1_2,
+		]);
+		var_dump(extension_loaded('soap'));die;
+		$result = $client->InvokeMethod();
+		var_dump($result);die;
 	}
 }

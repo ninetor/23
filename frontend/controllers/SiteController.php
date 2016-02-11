@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\models\gift\Step1;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -66,25 +67,33 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+	    $step1 = new Step1();
+
+        return $this->render('index', [
+	        'step1' => $step1,
+        ]);
     }
 
 
 	public function actionSoap () {
-//		phpinfo();die;
-		ini_set('soap.wsdl_cache_enabled',0);
-		ini_set('soap.wsdl_cache_ttl',0);
-		ini_set('default_socket_timeout', 300);
-		ini_set('connection_timeout', 300);
-
 		$wsdl = Yii::getAlias('@frontend').'/'.Yii::$app->params['wsdl'];
 		$client = new SoapClient($wsdl, [
 			'cache_wsdl' => WSDL_CACHE_NONE,
 			'exceptions' => 1,
 			'soap_version' => SOAP_1_2,
 		]);
-//		var_dump(extension_loaded('soap'));die;
-		$result = $client->InvokeMethod();
+		$result = $client->InvokeMethod([
+			'Methodname' => 'MTS_Wargaming_GiftList',
+			'MethodParams' => [
+				1026 => [
+					['name' => 'sec_code', 'Value' => ''],
+					['name' => 'sourceid', 'Value' => ''],
+				],
+//				'sourceid' => '...',
+//				['name' => 'sec_code', 'Value' => ''],
+//				['name' => 'sourceid', 'Value' => ''],
+			],
+		]);
 		echo json_encode($result);die;
 	}
 }

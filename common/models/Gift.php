@@ -30,7 +30,7 @@ class Gift extends \yii\db\ActiveRecord
     {
         return [
             [['date'], 'safe'],
-            [['from', 'to', 'gift_code'], 'required'],
+            [['from', 'gift_code'], 'required'],
             [['from', 'to', 'gift_code'], 'string', 'max' => 255]
         ];
     }

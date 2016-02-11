@@ -20,7 +20,7 @@ $(document).ready(function() {
         // autoCenter : false,
         helpers: {
 		    overlay: {
-		      locked: true,
+		      locked: false,
 		    }
 		}
     });
@@ -34,13 +34,21 @@ $(document).ready(function() {
 	})
 
 
-	//hover
-	// $('.wot-select__item').on('mouseover',function(){
-	// 	console.log('энавел');
-	// });
-	// $('.wot-select__item').on('mouseout',function(){
-	// 	console.log('убрал');
-	// });
+	//hover-main
+	$('.wot-select__item').on('mouseenter',function(){
+		$('.wot-select__item').find('img').animate({opacity: "0.3",},100);
+		$(this).find('img').animate({opacity: "1",},100);
+
+		// $('.wot-select__item').find('.select-btn').animate({opacity: "0.4",},100);
+		$(this).find('.select-btn').animate({opacity: "1",},100);
+
+		$(this).find('.wot-select__item-img__info').animate({opacity: "0",});
+		$(this).siblings('.wot-select__item').find('.wot-select__item-img__info').animate({opacity: "1",});
+	});
+	$('.wot-select__item').on('mouseleave',function(){
+		// $(this).removeClass('active');
+		$('.wot-select__item').find('.select-btn').animate({opacity: "0.4",},100);
+	});
 
 
 	if ($(window).width() < 584){
@@ -78,5 +86,18 @@ function isTouchDevice() {
 	return true == ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
 }
 
-
-
+function show2step() {
+	$("#prize-step2").fancybox({
+		'titlePosition'     : 'inside',
+		'transitionIn'      : 'none',
+		'transitionOut'     : 'none',
+		padding: 0,
+		maxWidth	: 1160,
+		autoDimensions: false,
+		helpers: {
+			overlay: {
+				locked: false,
+			}
+		}
+	}).click();
+}

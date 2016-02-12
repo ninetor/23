@@ -1,12 +1,6 @@
 <?php
-
-/* @var $this yii\web\View */
-
-use yii\bootstrap\ActiveForm;
-
 $this->title = 'My Yii Application';
 ?>
-
 
 <div class="container">
 	<div class="wot-info">
@@ -113,19 +107,53 @@ $this->title = 'My Yii Application';
 		<div id="tank-step2">
 			<div class="steps-wrap--tanks">
 				<div class="popup-content__title">Задание для конкурса</div>
+				<div class="task">
+					<label for="tank-task">Задание</label>
+					<div class="input-wrap">
+						<input type="text" id="tank-task" value="<?= $activity->text; ?>" class="prize-task input-bold">
+						<input type="hidden" class="current_activity" name="TankForm[activity]" value="<?= $activity->id;?>">
+						<a href="#" class="other">Другое</a>
+					</div>
+					<label for="tank-message">Напишите, почему хотите получить танк, а не носки:</label>
+					<textarea id="tank-message" name="TankForm[text]" placeholder="Например: «У меня столько носков, что я могу построить из них крепость!»"></textarea>
+					<label for="tank-name">Ваше имя и номер телефона:</label>
+
+					<div class="input-wrap">
+						<input type="text" id="tank-name" class="input-half" name="TankForm[name]" placeholder="Имя">
+						<div class="phone-code">
+							<input type="text" id="tank-phone" name="TankForm[phone]" class="input-half user_phone" placeholder="">
+						</div>
+					</div>
+					<span class="clarification">Номер телефона будет использован для связи с победителем и не будет опубликован на сайте</span>
+				</div>
+				<div class="btn-wrap">
+					<div class="btn-wrap__title">Поделитесь своим вариантом в социальной сети</div>
+
+					<a href="#tank-step3" id="tank_toStep3" class="popup popup-btn" style="display: none"></a>
+					<span class="social-btn social-btn--vk"><i></i>Вконтакте</span><!--class popup убираем с кнопки-->
+					<span class="social-btn social-btn--fb"><i></i>Facebook</span><!--class popup убираем с кнопки-->
+				</div>
+			</div>
+		</div>
+
+		<div id="tank-step3">
+			<div class="steps-wrap--tanks">
+				<div class="final-popup">
+					<div class="popup-content__title">Спасибо за участие!</div>
+					<div class="popup-content__info">
+						Для абонентов МТС &#8212; уникальная возможность:<br>
+						обменяйте баллы  &#171;МТС Бонус&#187; на золото, премиум аккаунт<br>
+						или инвайт-код World of Tanks
+						<strong>Сделайте подарок себе или другу!</strong>
+						<a href="#">Подробнее</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</form>
 
 	<form action="#" method="post">
 		<div id="prize-step1">
-			<?php $step1_form = ActiveForm::begin([
-				'id' => 'step1',
-				'validateOnBlur' => false,
-				'fieldConfig' => [
-					'template' => "{input}"
-				],
-			]); ?>
 			<div class="steps-wrap">
 				<div class="popup-content__title">Сделать подарок</div>
 				<div class="popup-content__info">
@@ -134,8 +162,8 @@ $this->title = 'My Yii Application';
 				</div>
 				<ol class="steps-list">
 					<li class="steps-list__item steps-list__item--active"><div class="item">Выберите подарок и введите свой номер телефона</div></li>
-					<li class="steps-list__item"><div class="item">Введите код для подтверждения</div></li>
 					<li class="steps-list__item"><div class="item">Введите номер, на который нужно отправить подарок</div></li>
+					<li class="steps-list__item"><div class="item">Введите код для подтверждения</div></li>
 					<li class="steps-list__item"><div class="item">SMS-поздравление c подарком отправлено!</div></li>
 				</ol>
 
@@ -145,57 +173,36 @@ $this->title = 'My Yii Application';
 							<div class="steps-cost--column"><span class="title">Выберите подарок</span></div>
 							<div class="steps-cost--column"><span class="title">Стоимость</span></div>
 						</div>
-						<div class="steps-cost--row">
-							<div class="steps-cost--column">
-								<input type="radio" value="456" id="prize1" name="Step1[gift_code]" class="radio">
-								<label for="prize1">50 игрового золота</label>
-							</div>
-							<div class="steps-cost--column">200 баллов МТС Бонус</div>
-						</div>
-						<div class="steps-cost--row">
-							<div class="steps-cost--column">
-								<input type="radio" id="prize2" name="prizes" class="radio">
-								<label for="prize2">100 игрового золота</label>
-							</div>
-							<div class="steps-cost--column">350 баллов МТС Бонус</div>
-						</div>
-						<div class="steps-cost--row">
-							<div class="steps-cost--column">
-								<input type="radio" id="prize3" name="prizes" class="radio">
-								<label for="prize3">250 игрового золота</label>
-							</div>
-							<div class="steps-cost--column">800 баллов МТС Бонус</div>
-						</div>
-						<div class="steps-cost--row">
-							<div class="steps-cost--column">
-								<input type="radio" id="prize4" name="prizes" class="radio">
-								<label for="prize4">1 день премиум-аккаунта</label>
-							</div>
-							<div class="steps-cost--column">800 баллов МТС Бонус</div>
-						</div>
-						<div class="steps-cost--row">
-							<div class="steps-cost--column">
-								<input type="radio" id="prize5" name="prizes" class="radio">
-								<label for="prize5">Инвайт-код (для новых игроков):<br> премиум танк T-127 + 3 дня<br> премиум-аккаунта</label>
-							</div>
-							<div class="steps-cost--column">100 баллов МТС Бонус</div>
-						</div>
+						<?php if(count($presents)) { ?>
+							<?php foreach ($presents as $present_key => $present) { ?>
+								<div class="steps-cost--row">
+									<div class="steps-cost--column">
+										<input type="radio" value="<?= $present_key; ?>" id="prize<?= $present_key; ?>" name="Step1[gift_code]" class="radio">
+										<label for="prize<?= $present_key; ?>">
+											<?= $present['name']; ?>
+											<?= isset($present['description']) ? $present['description'] : null; ?>
+										</label>
+									</div>
+									<div class="steps-cost--column"><?= $present['price']; ?> баллов МТС Бонус</div>
+								</div>
+							<?php } ?>
+						<?php } ?>
 					</div>
 					<div class="steps-cost--number">
 						<span class="title">Введите свой номер МТС для обмена баллов на выбранный подарок</span>
 						<div class="steps-cost--number-wrap">
 							<div class="phone-code">
-								<?= $step1_form->field($step1, 'from')->textInput()?>
+								<input class="user_phone" type="text" name="Step1[from]">
 							</div>
 						</div>
 						<a href="#">Как узнать сколько у меня баллов &#171;МТС Бонус&#187; ?</a>
 					</div>
 				</div>
 				<div class="btn-wrap">
-					<a href="#prize-step2" class="popup-btn">Продолжить</a>
+					<span class="popup-btn">Продолжить</span>
+					<a href="#prize-step2" id="toStep2" class="popup popup-btn" style="display: none"></a>
 				</div>
 			</div>
-			<?php ActiveForm::end(); ?>
 		</div>
 		<div id="prize-step2">
 			<div class="steps-wrap">
@@ -206,18 +213,21 @@ $this->title = 'My Yii Application';
 				</div>
 				<ol class="steps-list">
 					<li class="steps-list__item"><div class="item">Выберите подарок и введите свой номер телефона</div></li>
-					<li class="steps-list__item steps-list__item--active"><div class="item">Введите код для подтверждения</div></li>
-					<li class="steps-list__item"><div class="item">Введите номер, на который нужно отправить подарок</div></li>
+					<li class="steps-list__item steps-list__item--active"><div class="item">Введите номер, на который нужно отправить подарок</div></li>
+					<li class="steps-list__item"><div class="item">Введите код для подтверждения</div></li>
 					<li class="steps-list__item"><div class="item">SMS-поздравление c подарком отправлено!</div></li>
 				</ol>
 				<div class="password-wrap">
-					<span class="title">Введите код, полученный в SMS</span>
-					на номер <i>+375 (29) 123-45-67</i>
+					<span class="title">Введите номер телефона, на который хотите отправить подарок</span>
+					На данный номер будет отправлено SMS-поздравление с уникальным кодом для игры  World  of Tanks
 					<div class="steps-cost--number-wrap">
-						<input type="password">
+						<div class="phone-code">
+							<input class="user_phone" type="text" name="Step2[to]">
+						</div>
 					</div>
 					<div class="btn-wrap">
-						<a href="#prize-step3" class="popup popup-btn">Продолжить</a>
+						<span class="popup-btn">Продолжить</span>
+						<a href="#prize-step3" id="toStep3" class="popup popup-btn" style="display: none"></a>
 					</div>
 				</div>
 			</div>
@@ -231,17 +241,15 @@ $this->title = 'My Yii Application';
 				</div>
 				<ol class="steps-list">
 					<li class="steps-list__item"><div class="item">Выберите подарок и введите свой номер телефона</div></li>
-					<li class="steps-list__item"><div class="item">Введите код для подтверждения</div></li>
-					<li class="steps-list__item steps-list__item--active"><div class="item">Введите номер, на который нужно отправить подарок</div></li>
+					<li class="steps-list__item"><div class="item">Введите номер, на который нужно отправить подарок</div></li>
+					<li class="steps-list__item steps-list__item--active"><div class="item">Введите код для подтверждения</div></li>
 					<li class="steps-list__item"><div class="item">SMS-поздравление c подарком отправлено!</div></li>
 				</ol>
 				<div class="password-wrap">
-					<span class="title">Введите номер телефона, на который хотите отправить подарок</span>
-					На данный номер будет отправлено SMS-поздравление с уникальным кодом для игры  World  of Tanks
+					<span class="title">Введите код, полученный в SMS</span>
+					на номер <i>+375 (29) 123-45-67</i>
 					<div class="steps-cost--number-wrap">
-						<div class="phone-code">
-							<input type="text">
-						</div>
+						<input type="password">
 					</div>
 					<div class="btn-wrap">
 						<a href="#prize-step4" class="popup popup-btn">Продолжить</a>
@@ -258,8 +266,8 @@ $this->title = 'My Yii Application';
 				</div>
 				<ol class="steps-list">
 					<li class="steps-list__item"><div class="item">Выберите подарок и введите свой номер телефона</div></li>
-					<li class="steps-list__item"><div class="item">Введите код для подтверждения</div></li>
 					<li class="steps-list__item"><div class="item">Введите номер, на который нужно отправить подарок</div></li>
+					<li class="steps-list__item"><div class="item">Введите код для подтверждения</div></li>
 					<li class="steps-list__item steps-list__item--active"><div class="item">SMS-поздравление c подарком отправлено!</div></li>
 				</ol>
 				<div class="password-wrap">

@@ -2,6 +2,7 @@
 
 namespace frontend\models\gift;
 
+use Yii;
 use common\models\Gift;
 use yii\base\Model;
 
@@ -32,7 +33,7 @@ class Step1 extends Model {
 			$gift->setAttributes($this->getAttributes());
 
 			if($gift->save())
-				return true;
+				return Yii::$app->db->getLastInsertID() ;
 		}
 		return false;
 	}

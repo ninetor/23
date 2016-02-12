@@ -439,19 +439,24 @@ input[type="password"] {
   font-size: 40px;
   letter-spacing: 3px; }
 
+textarea {
+  width: 100%;
+  border: 1px solid #a29f89;
+  padding: 10px; }
+
 ::-webkit-input-placeholder {
-  color: #c0392b; }
+  color: #aeaead; }
 
 ::-moz-placeholder {
-  color: #c0392b; }
+  color: #aeaead; }
 
 /* Firefox 19+ */
 :-moz-placeholder {
-  color: #c0392b; }
+  color: #aeaead; }
 
 /* Firefox 18- */
 :-ms-input-placeholder {
-  color: #c0392b; }
+  color: #aeaead; }
 
 :focus::-webkit-input-placeholder {
   color: transparent; }
@@ -466,7 +471,8 @@ input[type="password"] {
   color: transparent; }
 
 strong {
-  font-family: 'WarHeliosCondCBold'; }
+  font-family: 'WarHeliosCondCBold';
+  font-weight: normal; }
 
 a {
   color: #eb3200;
@@ -835,7 +841,7 @@ p {
   margin-right: -4px;
   vertical-align: middle;
   opacity: 0.6; }
-  .steps-list__item:nth-child(2) {
+  .steps-list__item:nth-child(3) {
     padding-left: 70px; }
   .steps-list__item:before {
     content: counter(step-counter);
@@ -855,6 +861,14 @@ p {
   .steps-list__item .item {
     display: table-cell;
     vertical-align: middle; }
+
+.final-popup .popup-content__info {
+  line-height: 40px; }
+  .final-popup .popup-content__info strong {
+    padding-top: 0;
+    margin: 40px 0; }
+  .final-popup .popup-content__info a {
+    font-family: 'WarHeliosCondCBold'; }
 
 .steps-list__item--active {
   opacity: 1; }
@@ -951,8 +965,70 @@ p {
     color: #b4b5b3;
     font-size: 20px; }
 
+.task {
+  background: rgba(0, 0, 0, 0.2);
+  width: 720px;
+  padding: 20px 40px;
+  margin-bottom: 30px; }
+  .task label {
+    display: block;
+    color: #373a34;
+    margin-bottom: 10px;
+    cursor: pointer; }
+  .task input[type="text"] {
+    margin-bottom: 20px; }
+    .task input[type="text"].input-half {
+      width: 43%;
+      margin-right: 30px;
+      float: left; }
+  .task textarea {
+    height: 120px;
+    resize: vertical;
+    margin-bottom: 20px; }
+  .task .clarification {
+    margin: 0;
+    font-size: 17px; }
+  .task .phone-code {
+    width: 43%;
+    margin-right: 30px;
+    float: left; }
+    .task .phone-code input[type="text"].input-half {
+      width: 100%;
+      margin-right: 30px;
+      float: left; }
+
+input[type="text"].input-bold {
+  font-family: 'WarHeliosCondCBold'; }
+
+.other {
+  position: absolute;
+  top: 21px;
+  right: 10px;
+  color: #373a34;
+  text-decoration: none;
+  border-bottom: 0;
+  padding-left: 24px;
+  background: url(../img/content/other.png) 0 0 no-repeat; }
+  .other:hover {
+    border-bottom: 0; }
+
+input[type="text"].prize-task {
+  padding-right: 100px; }
+
+.input-wrap {
+  position: relative; }
+  .input-wrap:after {
+    content: "";
+    clear: both;
+    display: table; }
+
 .btn-wrap {
   text-align: center; }
+
+.btn-wrap__title {
+  font-size: 25px;
+  margin-bottom: 15px;
+  display: block; }
 
 .popup-btn {
   display: inline-block;
@@ -1051,6 +1127,9 @@ p {
   position: relative;
   top: 4px;
   margin-left: 14px; }
+
+#tank-step2 .steps-wrap--tanks {
+  padding: 45px 225px; }
 
 .password-wrap {
   padding: 20px 0 40px;

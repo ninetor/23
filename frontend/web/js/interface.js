@@ -59,6 +59,16 @@ $(document).ready(function() {
 		$('.wot-select__item-img--prize').insertBefore( $('.select-btn--prize') );
 	}
 
+
+
+
+	//MASK
+	if($('.user_phone').length>0){
+		$('.user_phone').each(function(){
+	      $(this).mask("(99) 999-99-99");
+	    });
+	}
+
 });
 
 $(window).resize(function() {
@@ -86,18 +96,5 @@ function isTouchDevice() {
 	return true == ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
 }
 
-function show2step() {
-	$("#prize-step2").fancybox({
-		'titlePosition'     : 'inside',
-		'transitionIn'      : 'none',
-		'transitionOut'     : 'none',
-		padding: 0,
-		maxWidth	: 1160,
-		autoDimensions: false,
-		helpers: {
-			overlay: {
-				locked: false,
-			}
-		}
-	}).click();
-}
+
+

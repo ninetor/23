@@ -1,7 +1,9 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Activity;
 use frontend\models\gift\Step1;
+use frontend\models\Present;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -67,10 +69,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-	    $step1 = new Step1();
+		$presents = Present::getPresentsList();
+	    $activity = Activity::find()->orderBy('RAND()')->one();
 
         return $this->render('index', [
-	        'step1' => $step1,
+	        'presents' => $presents,
+	        'activity' => $activity,
         ]);
     }
 

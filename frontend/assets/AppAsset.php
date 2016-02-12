@@ -24,6 +24,7 @@ class AppAsset extends AssetBundle
     public $js = [
 	    'js/interface.js',
 	    'js/vendors/fancybox/jquery.fancybox.pack.js',
+	    'js/vendors/mask/jquery.mask.min.js',
 	    'js/forms.js'
     ];
     public $depends = [

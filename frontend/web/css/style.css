@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ==========================================================================
    Normalize.scss settings
    ========================================================================== */
@@ -472,7 +473,8 @@ textarea {
 
 strong {
   font-family: 'WarHeliosCondCBold';
-  font-weight: normal; }
+  font-weight: normal;
+  color: #dedccf; }
 
 a {
   color: #eb3200;
@@ -487,14 +489,17 @@ a {
 
 h1 {
   font-family: 'WarHeliosCondCBold';
+  font-weight: normal;
   font-size: 35px;
   color: #dedccf;
-  margin: 0; }
+  margin: 0;
+  margin-bottom: 45px; }
 
 h2 {
   font-size: 30px;
   color: #dedccf;
-  margin: 0; }
+  margin: 0;
+  margin-bottom: 15px; }
 
 h3 {
   font-size: 20px;
@@ -521,7 +526,8 @@ p {
 .title {
   font-family: 'WarHeliosCondCBold';
   font-size: 25px;
-  display: block; }
+  display: block;
+  font-weight: normal; }
 
 .layout {
   width: 100%;
@@ -557,6 +563,36 @@ p {
   position: relative;
   z-index: 5; }
 
+.container__inner {
+  max-width: 870px;
+  margin: 0 auto; }
+  .container__inner p {
+    line-height: 29px;
+    margin-bottom: 14px; }
+
+.page-table {
+  display: table;
+  width: 100%;
+  margin-bottom: 35px;
+  color: #dedccf; }
+
+.page-table__row {
+  display: table-row; }
+  .page-table__row:first-child {
+    background: rgba(222, 220, 207, 0.2); }
+    .page-table__row:first-child .page-table__cell {
+      border-bottom: 0; }
+  .page-table__row:last-child .page-table__cell {
+    border-bottom: 0; }
+
+.definition {
+  font-size: 25px; }
+
+.page-table__cell {
+  display: table-cell;
+  padding: 15px;
+  border-bottom: 1px solid rgba(222, 220, 207, 0.2); }
+
 .page-header {
   background: #222222 url(../img/content/header-pattern.png) repeat-x;
   position: relative;
@@ -585,10 +621,13 @@ p {
   width: 268px;
   height: 61px;
   margin: 9px 0 10px 0;
+  border-bottom: 0;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease; }
+  .top-logo:hover {
+    border-bottom: 0; }
   .top-logo img {
     max-width: 100%;
     height: auto; }
@@ -643,6 +682,7 @@ p {
   border: 0;
   text-transform: uppercase;
   font-family: 'WarHeliosCondCBold';
+  font-weight: normal;
   font-size: 18px;
   color: #dedccf;
   border-left: 1px solid #453f3b;
@@ -699,6 +739,7 @@ p {
 .wot-info__title {
   font-size: 40px;
   font-family: 'WarHeliosCondCBold';
+  font-weight: normal;
   color: #dedccf; }
 
 .wot-info__right {
@@ -730,6 +771,7 @@ p {
       background: url(../img/content/popup-btn-bg.png) center -70px no-repeat;
       color: #ffffff;
       font-family: 'WarHeliosCondCBold';
+      font-weight: normal;
       line-height: 67px;
       border: 0;
       text-shadow: 0px 2px 3px black; }
@@ -808,6 +850,7 @@ p {
   font-size: 40px;
   text-align: center;
   font-family: 'WarHeliosCondCBold';
+  font-weight: normal;
   margin-bottom: 27px; }
 
 .popup-content__info {
@@ -817,13 +860,17 @@ p {
   margin-bottom: 20px; }
   .popup-content__info strong {
     display: block;
-    padding-top: 12px; }
+    padding-top: 12px;
+    color: #000; }
 
 .steps-wrap {
   padding: 45px 70px; }
 
 .steps-wrap--tanks {
   padding: 45px 35px; }
+
+.steps-wrap--members {
+  padding: 45px 100px; }
 
 .steps-list {
   overflow: hidden;
@@ -846,6 +893,7 @@ p {
   .steps-list__item:before {
     content: counter(step-counter);
     font-family: 'WarHeliosCondCBold';
+    font-weight: normal;
     color: rgba(0, 0, 0, 0.1);
     font-size: 80px;
     line-height: 70px;
@@ -868,7 +916,8 @@ p {
     padding-top: 0;
     margin: 40px 0; }
   .final-popup .popup-content__info a {
-    font-family: 'WarHeliosCondCBold'; }
+    font-family: 'WarHeliosCondCBold';
+    font-weight: normal; }
 
 .steps-list__item--active {
   opacity: 1; }
@@ -998,7 +1047,8 @@ p {
       float: left; }
 
 input[type="text"].input-bold {
-  font-family: 'WarHeliosCondCBold'; }
+  font-family: 'WarHeliosCondCBold';
+  font-weight: normal; }
 
 .other {
   position: absolute;
@@ -1037,6 +1087,7 @@ input[type="text"].prize-task {
   color: #fff;
   font-size: 30px;
   font-family: 'WarHeliosCondCBold';
+  font-weight: normal;
   text-align: center;
   padding: 0 75px;
   background: url(../img/content/popup-btn-bg.png) center 0 no-repeat;
@@ -1094,7 +1145,8 @@ input[type="text"].prize-task {
   border-radius: 10px;
   padding: 40px 10px 20px;
   height: 100%;
-  font-family: 'WarHeliosCondCBold'; }
+  font-family: 'WarHeliosCondCBold';
+  font-weight: normal; }
 
 .tank-steps-list__inner-img {
   height: 97px;
@@ -1163,6 +1215,7 @@ input[type="text"].prize-task {
   color: #fff;
   font-size: 20px;
   font-family: 'WarHeliosCondCBold';
+  font-weight: normal;
   text-align: center;
   padding: 0 55px;
   border-bottom: 0;
@@ -1314,6 +1367,305 @@ input[type="text"].prize-task {
 .menu-right__item {
   margin-bottom: 10px; }
 
+.tabs {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 35px;
+  text-align: center; }
+  .tabs:after {
+    content: "";
+    clear: both;
+    display: table; }
+  .tabs li {
+    display: inline-block;
+    margin-right: 30px; }
+    .tabs li.active a {
+      color: #373a34;
+      font-size: 40px;
+      font-family: 'WarHeliosCondCBold';
+      font-weight: normal;
+      border-bottom: 0; }
+      .tabs li.active a:hover {
+        border-bottom: 0; }
+  .tabs a {
+    font-size: 25px; }
+
+.member-item {
+  border-bottom: 1px dashed #a29f89;
+  margin-bottom: 20px;
+  padding-bottom: 16px; }
+  .member-item:last-child {
+    border-bottom: 1px dashed transparent; }
+
+.member-item__name {
+  font-family: 'WarHeliosCondCBold';
+  font-weight: normal;
+  margin-bottom: 12px; }
+
+.member-item__date {
+  display: inline-block;
+  margin-left: 5px;
+  color: #969695;
+  font-size: 17px;
+  font-family: 'WarHeliosCondC', Arial, sans-serif; }
+
+.member-item__info {
+  font-family: 'WarHeliosCondC', Arial, sans-serif;
+  line-height: 24px; }
+
+.member-list {
+  margin-bottom: 30px; }
+
+.paging {
+  text-align: center; }
+  .paging a, .paging span {
+    display: inline-block;
+    margin-right: 17px; }
+  .paging span.active {
+    color: #fff;
+    background: #eb3200;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    line-height: 40px;
+    height: 40px;
+    width: 40px; }
+  .paging span.etc {
+    color: #eb3200; }
+
+.centered {
+  text-align: center; }
+
+.question-item {
+  padding: 27px 165px 0;
+  cursor: pointer;
+  position: relative; }
+  .question-item:hover i {
+    opacity: 1;
+    filter: alpha(opacity=1); }
+  .question-item:hover .question-link {
+    border-bottom: 1px solid #eb3200; }
+    .question-item:hover .question-link:after {
+      content: "";
+      opacity: 1;
+      filter: alpha(opacity=1); }
+  .question-item.active {
+    background: rgba(222, 220, 207, 0.1); }
+    .question-item.active .question-link {
+      color: #dedccf;
+      border-bottom: 1px solid rgba(235, 50, 0, 0); }
+      .question-item.active .question-link:after {
+        content: "";
+        display: none; }
+    .question-item.active:after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 0 15px 15px;
+      border-color: transparent transparent #eb3300 transparent;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      -moz-transform: rotate(-90deg);
+      -o-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+      -webkit-transform: rotate(-90deg);
+      transform: rotate(-90deg); }
+
+.question-link {
+  border-bottom: 0;
+  font-size: 25px;
+  color: #eb3200;
+  padding-bottom: 26px;
+  -moz-transition: color 0.3s linear;
+  -o-transition: color 0.3s linear;
+  -webkit-transition: color 0.3s linear;
+  transition: color 0.3s linear;
+  border-bottom: 1px solid rgba(235, 50, 0, 0.5);
+  position: relative; }
+  .question-link:hover {
+    border-bottom: 0; }
+  .question-link:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 15px 15px;
+    border-color: transparent transparent #eb3300 transparent;
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    opacity: 0.5;
+    filter: alpha(opacity=0.5);
+    -moz-transition: opacity 0.3s ease;
+    -o-transition: opacity 0.3s ease;
+    -webkit-transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease; }
+
+.question-list {
+  padding-bottom: 75px;
+  max-width: 1200px;
+  margin: 0 auto; }
+  .question-list ol {
+    counter-reset: myCounter;
+    padding: 0; }
+    .question-list ol li {
+      line-height: 30px;
+      margin-bottom: 15px;
+      list-style: none;
+      position: relative; }
+      .question-list ol li:before {
+        counter-increment: myCounter;
+        content: counter(myCounter);
+        color: #a29f89;
+        display: inline-block;
+        font-size: 30px;
+        font-family: 'WarHeliosCondCBold';
+        font-weight: normal;
+        position: absolute;
+        top: -2px;
+        left: -30px; }
+  .question-list ul {
+    padding: 0;
+    list-style-type: none; }
+    .question-list ul li {
+      line-height: 30px;
+      margin-bottom: 15px;
+      list-style: none;
+      position: relative; }
+      .question-list ul li:before {
+        content: "";
+        width: 11px;
+        height: 13px;
+        display: inline-block;
+        position: absolute;
+        top: 7px;
+        left: -27px;
+        background: url(../img/content/li-bg.png) no-repeat; }
+
+.question-answer {
+  padding-bottom: 27px;
+  display: none; }
+
+.link-centered {
+  text-align: center;
+  padding: 8px 0 75px; }
+
+.download {
+  color: #ffffff;
+  font-size: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+  margin-left: 55px; }
+  .download:before {
+    content: "";
+    display: inline-block;
+    width: 36px;
+    height: 46px;
+    background: url(../img/content/download.png) no-repeat;
+    position: absolute;
+    left: -50px;
+    top: -9px; }
+  .download:hover {
+    border-bottom: 1px solid white; }
+
+.page404 {
+  max-width: 680px;
+  margin: 50px auto 0;
+  text-align: center; }
+
+.page404__img {
+  margin-bottom: 65px; }
+  .page404__img img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+    max-height: 100%; }
+
+.page404__text a {
+  font-size: 25px; }
+
+.one_more {
+  color: #fff;
+  font-size: 30px;
+  margin-bottom: 27px; }
+
+.work-list {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 30px;
+  list-style-type: none;
+  overflow: hidden; }
+
+.work-list__item {
+  padding-right: 19px;
+  width: 33.3%;
+  float: left;
+  text-align: center; }
+  .work-list__item:last-child {
+    padding-right: 0; }
+
+.work-list__item-inner {
+  width: 100%;
+  padding: 30px 0;
+  overflow: hidden;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -ms-border-radius: 20px;
+  border-radius: 20px;
+  background: url(../img/content/work-bg.jpg) center;
+  background-size: cover; }
+
+.work-list__item-img1 {
+  margin: 0 auto 21px;
+  height: 118px;
+  width: 83px;
+  background: url(../img/content/work-img1.png) center no-repeat; }
+
+.work-list__item-img2 {
+  margin: 0 auto 21px;
+  height: 118px;
+  width: 102px;
+  background: url(../img/content/work-img2.png) center no-repeat; }
+
+.work-list__item-img3 {
+  margin: 0 auto 21px;
+  height: 118px;
+  width: 101px;
+  background: url(../img/content/work-img3.png) center no-repeat; }
+
+.work-list__item-text {
+  color: #dedccf;
+  font-weight: normal;
+  font-family: 'WarHeliosCondCBold';
+  font-size: 25px; }
+
+.bonus-question ul {
+  padding: 0;
+  list-style-type: none; }
+  .bonus-question ul li {
+    line-height: 30px;
+    margin-bottom: 15px;
+    list-style: none;
+    position: relative; }
+    .bonus-question ul li:before {
+      content: "";
+      width: 11px;
+      height: 13px;
+      display: inline-block;
+      position: absolute;
+      top: 7px;
+      left: -27px;
+      background: url(../img/content/li-bg.png) no-repeat; }
+    .bonus-question ul li ol li {
+      list-style-type: decimal; }
+
+.bonus-question strong {
+  font-size: 25px; }
+
 @media screen and (max-width: 1200px) {
   .container {
     padding: 0 15px; } }
@@ -1352,7 +1704,9 @@ input[type="text"].prize-task {
     line-height: 57px; }
   .wot-info__right {
     font-size: 20px;
-    line-height: 24px; } }
+    line-height: 24px; }
+  .question-item {
+    padding: 27px 50px 0; } }
 
 @media screen and (max-width: 768px) {
   .menu-btn {
@@ -1419,4 +1773,84 @@ input[type="text"].prize-task {
     padding: 0; }
   .select-btn {
     padding: 0 10px;
-    width: 200px; } }
+    width: 200px; }
+  .page-table {
+    display: block; }
+  .page-table__row {
+    display: block;
+    border-bottom: 1px solid rgba(222, 220, 207, 0.2);
+    padding: 10px 0; }
+    .page-table__row:first-child {
+      display: none; }
+    .page-table__row:last-child {
+      border-bottom: 0; }
+  .page-table-wrap {
+    margin: 0 -15px;
+    padding: 0 15px;
+    background: rgba(222, 220, 207, 0.1); }
+  .page-table__cell {
+    display: block;
+    padding: 5px 0;
+    border-bottom: 0;
+    color: #a29f89; }
+    .page-table__cell br {
+      display: none; }
+    .page-table__cell.centered {
+      text-align: left; }
+    .page-table__cell:first-child {
+      color: #dedccf;
+      font-family: 'WarHeliosCondCBold';
+      font-weight: normal; }
+  .points:after {
+    content: "баллов МТС";
+    display: inline-block;
+    margin-left: 5px; }
+  .question-item {
+    padding: 27px 0px 0; }
+    .question-item.active {
+      margin: 0 -15px;
+      padding-left: 15px;
+      padding-right: 15px; }
+      .question-item.active:after {
+        display: none; }
+  .question-link:after {
+    bottom: 0px; }
+  .question-list ol, .question-list ul {
+    padding-left: 30px; }
+    .question-list ol li, .question-list ul li {
+      line-height: 22px; }
+  h1 {
+    font-size: 25px;
+    font-family: 'WarHeliosCondC', Arial, sans-serif;
+    margin-bottom: 25px; }
+  h2 {
+    font-size: 20px;
+    margin-bottom: 10px; }
+  body {
+    font-size: 17px; }
+  .container__inner p {
+    line-height: 22px; }
+    .container__inner p.centered {
+      text-align: left; }
+  .definition {
+    font-size: 20px; }
+  .question-link {
+    font-size: 20px; }
+  .question-item {
+    padding: 20px 0px 0; }
+  .question-answer,
+  .question-link {
+    padding-bottom: 15px;
+    line-height: 22px; }
+  .question-list {
+    padding-bottom: 50px; }
+  .download {
+    font-size: 20px; }
+  .page404__img {
+    margin-bottom: 35px; }
+  .page404 {
+    margin: 25px auto 0; }
+  .one_more {
+    font-size: 20px; }
+  .page404__text a {
+    font-size: 20px; } }

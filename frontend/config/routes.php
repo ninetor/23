@@ -3,6 +3,8 @@
 return [
 // Site controller
 	'/' => 'site/index',
+	'rules' => 'site/rules',
+	'bonus' => 'site/bonus',
 
 // Gift controller
 	'gift_step1' => 'gift/step1',

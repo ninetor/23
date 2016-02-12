@@ -5,10 +5,9 @@ namespace frontend\controllers;
 use common\models\Activity;
 use frontend\models\TankForm;
 use Yii;
-use yii\web\Controller;
 use yii\web\Response;
 
-class TankController extends Controller {
+class TankController extends BaseController {
 
 	/**
 	 * @return array|bool

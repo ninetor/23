@@ -13,11 +13,7 @@ $(document).ready(function() {
         'transitionOut'     : 'none',
         padding: 0,
         maxWidth	: 1160,
-        // minHeight: 300,
-        // autoSize    : false,
         autoDimensions: false,
-    	// maxWidth : '100%',
-        // autoCenter : false,
         helpers: {
 		    overlay: {
 		      locked: false,
@@ -46,7 +42,6 @@ $(document).ready(function() {
 		$(this).siblings('.wot-select__item').find('.wot-select__item-img__info').animate({opacity: "1",});
 	});
 	$('.wot-select__item').on('mouseleave',function(){
-		// $(this).removeClass('active');
 		$('.wot-select__item').find('.select-btn').animate({opacity: "0.4",},100);
 	});
 
@@ -59,15 +54,34 @@ $(document).ready(function() {
 		$('.wot-select__item-img--prize').insertBefore( $('.select-btn--prize') );
 	}
 
-
-
-
 	//MASK
 	if($('.user_phone').length>0){
 		$('.user_phone').each(function(){
 	      $(this).mask("(99) 999-99-99");
 	    });
 	}
+
+
+	//TABS-MEMBERS
+	$(".tab_content").hide();
+	$("ul.tabs li:first").addClass("active").show();
+	$(".tab_content:first").show();
+	//On Click Event
+	$("ul.tabs li").click(function() {
+		$("ul.tabs li").removeClass("active");
+		$(this).addClass("active");
+		$(".tab_content").hide();
+		var activeTab = $(this).find("a").attr("href");
+		$(activeTab).fadeIn();
+		return false;
+	});
+
+
+	//open question winners-page
+	$('.question-item').on('click',function(){
+		$(this).toggleClass('active');
+		$(this).find('.question-answer').fadeToggle(10);
+	});
 
 });
 

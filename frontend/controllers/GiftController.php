@@ -11,10 +11,9 @@ namespace frontend\controllers;
 use frontend\models\gift\Step2;
 use Yii;
 use frontend\models\gift\Step1;
-use yii\web\Controller;
 use yii\web\Response;
 
-class GiftController extends Controller {
+class GiftController extends BaseController {
 
 
 	/**

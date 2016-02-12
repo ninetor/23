@@ -1,11 +1,6 @@
 <?php
 namespace frontend\controllers;
 
-use common\models\Activity;
-use frontend\models\gift\Step1;
-use frontend\models\Present;
-use Yii;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use SoapClient;
@@ -13,7 +8,7 @@ use SoapClient;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends BaseController
 {
     /**
      * @inheritdoc
@@ -69,15 +64,17 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-		$presents = Present::getPresentsList();
-	    $activity = Activity::find()->orderBy('RAND()')->one();
-
-        return $this->render('index', [
-	        'presents' => $presents,
-	        'activity' => $activity,
-        ]);
+        return $this->render('index');
     }
 
+
+	public function actionRules () {
+		return $this->render('rules');
+	}
+
+	public function actionBonus () {
+		return $this->render('bonus');
+	}
 
 	public function actionSoap () {
 		$wsdl = Yii::getAlias('@frontend').'/'.Yii::$app->params['wsdl'];

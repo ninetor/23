@@ -17,7 +17,8 @@ use yii\web\Controller;
 class BaseController extends Controller {
 
 	public function init() {
-		$presents = Present::getPresentsList();
+
+		$presents = (new Present())->getPresentsList();
 		$activity = Activity::find()->orderBy('RAND()')->one();
 
 		$this->getView()->params = [

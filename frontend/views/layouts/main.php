@@ -21,9 +21,10 @@ AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?= Yii::$app->language ?>xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" >
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
+	<meta property="og:image" content="http://tanki.mts.by/img/share/1_1.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
@@ -51,9 +52,9 @@ AppAsset::register($this);
 				<span class="burger-icon"></span>
 			</a>
 			<div class="socials">
-				<a href="#" class="socials__item vk"><span></span></a>
-				<a href="#" class="socials__item facebook"><span></span></a>
-				<a href="#" class="socials__item twitter"><span></span></a>
+				<a href="#" data-share="vk_main" class="socials__item vk"><span></span></a>
+				<a href="#" data-share="fb_main" class="socials__item facebook"><span></span></a>
+				<a href="#" data-share="tw_main" class="socials__item twitter"><span></span></a>
 			</div>
 			<nav class="top-nav">
 				<a href="#tank-step1" class="top-nav__item popup">Выиграть танк</a>
@@ -132,7 +133,9 @@ AppAsset::register($this);
 				</div>
 				<div class="btn-wrap">
 					<a href="#tank-step2" class="popup popup-btn">Выиграть танк</a>
-					<a href="#members" class="popup members">Участники</a>
+					<div class="members-wrap">
+						<a href="#members" class="popup members">Участники</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -141,7 +144,7 @@ AppAsset::register($this);
 			<div class="steps-wrap--tanks">
 				<div class="popup-content__title">Задание для конкурса</div>
 				<div class="task">
-					<label for="tank-task">Задание</label>
+					<label for="tank-task"><a href="#" class="other">Другое</a>Задание</label>
 					<div class="input-wrap">
 						<input type="text" id="tank-task" value="<?= $activity->text; ?>" class="prize-task input-bold">
 						<input type="hidden" class="current_activity" name="TankForm[activity]" value="<?= $activity->id;?>">
@@ -161,10 +164,13 @@ AppAsset::register($this);
 				</div>
 				<div class="btn-wrap">
 					<div class="btn-wrap__title">Поделитесь своим вариантом в социальной сети</div>
-
 					<a href="#tank-step3" id="tank_toStep3" class="popup popup-btn" style="display: none"></a>
-					<span class="social-btn social-btn--vk"><i></i>Вконтакте</span><!--class popup убираем с кнопки-->
-					<span class="social-btn social-btn--fb"><i></i>Facebook</span><!--class popup убираем с кнопки-->
+					<div class="social-btn-wrap">
+						<span class="social-btn social-btn--vk"><i></i>Вконтакте</span>
+					</div>
+					<div class="social-btn-wrap">
+						<span class="social-btn social-btn--fb"><i></i>Facebook</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -193,10 +199,13 @@ AppAsset::register($this);
 					Игровое золото, премиум-аккаунт или инвайт-код &#8212; сделайте подарок поклоннику World of Tanks!
 					<strong>Подарок вы можете оплатить вашими баллами &#171;МТС Бонус&#187;</strong>
 				</div>
+				<ul class="steps-list-mobile">
+					<li>Шаг 1 из 4</li>
+				</ul>
 				<ol class="steps-list">
 					<li class="steps-list__item steps-list__item--active"><div class="item">Выберите подарок и введите свой номер телефона</div></li>
-					<li class="steps-list__item"><div class="item">Введите номер, на который нужно отправить подарок</div></li>
 					<li class="steps-list__item"><div class="item">Введите код для подтверждения</div></li>
+					<li class="steps-list__item"><div class="item">Введите номер, на который нужно отправить подарок</div></li>
 					<li class="steps-list__item"><div class="item">SMS-поздравление c подарком отправлено!</div></li>
 				</ol>
 
@@ -215,6 +224,7 @@ AppAsset::register($this);
 											<?= $present['name']; ?>
 											<?= isset($present['description']) ? $present['description'] : null; ?>
 										</label>
+										<strong class="mobile-sum"> - <?= $present['price']; ?> баллов</strong>
 									</div>
 									<div class="steps-cost--column"><?= $present['price']; ?> баллов МТС Бонус</div>
 								</div>
@@ -228,7 +238,7 @@ AppAsset::register($this);
 								<input class="user_phone" type="text" name="Step1[from]">
 							</div>
 						</div>
-						<a href="#">Как узнать сколько у меня баллов &#171;МТС Бонус&#187; ?</a>
+						<a href="<?= Url::to(['site/bonus']);?>">Как узнать сколько у меня баллов &#171;МТС Бонус&#187; ?</a>
 					</div>
 				</div>
 				<div class="btn-wrap">
@@ -244,19 +254,20 @@ AppAsset::register($this);
 					Игровое золото, премиум-аккаунт или инвайт-код &#8212; сделайте подарок поклоннику World of Tanks!
 					<strong>Подарок вы можете оплатить вашими баллами &#171;МТС Бонус&#187;</strong>
 				</div>
+				<ul class="steps-list-mobile">
+					<li>Шаг 2 из 4</li>
+				</ul>
 				<ol class="steps-list">
 					<li class="steps-list__item"><div class="item">Выберите подарок и введите свой номер телефона</div></li>
-					<li class="steps-list__item steps-list__item--active"><div class="item">Введите номер, на который нужно отправить подарок</div></li>
-					<li class="steps-list__item"><div class="item">Введите код для подтверждения</div></li>
+					<li class="steps-list__item steps-list__item--active"><div class="item">Введите код для подтверждения</div></li>
+					<li class="steps-list__item"><div class="item">Введите номер, на который нужно отправить подарок</div></li>
 					<li class="steps-list__item"><div class="item">SMS-поздравление c подарком отправлено!</div></li>
 				</ol>
 				<div class="password-wrap">
-					<span class="title">Введите номер телефона, на который хотите отправить подарок</span>
-					На данный номер будет отправлено SMS-поздравление с уникальным кодом для игры  World  of Tanks
+					<span class="title">Введите код, полученный в SMS</span>
+					на номер <i>+375 (29) 123-45-67</i>
 					<div class="steps-cost--number-wrap">
-						<div class="phone-code">
-							<input class="user_phone" type="text" name="Step2[to]">
-						</div>
+						<input type="password" name="Step2[validation_code]">
 					</div>
 					<div class="btn-wrap">
 						<span class="popup-btn">Продолжить</span>
@@ -272,20 +283,26 @@ AppAsset::register($this);
 					Игровое золото, премиум-аккаунт или инвайт-код &#8212; сделайте подарок поклоннику World of Tanks!
 					<strong>Подарок вы можете оплатить вашими баллами &#171;МТС Бонус&#187;</strong>
 				</div>
+				<ul class="steps-list-mobile">
+					<li>Шаг 3 из 4</li>
+				</ul>
 				<ol class="steps-list">
 					<li class="steps-list__item"><div class="item">Выберите подарок и введите свой номер телефона</div></li>
-					<li class="steps-list__item"><div class="item">Введите номер, на который нужно отправить подарок</div></li>
-					<li class="steps-list__item steps-list__item--active"><div class="item">Введите код для подтверждения</div></li>
+					<li class="steps-list__item"><div class="item">Введите код для подтверждения</div></li>
+					<li class="steps-list__item steps-list__item--active"><div class="item">Введите номер, на который нужно отправить подарок</div></li>
 					<li class="steps-list__item"><div class="item">SMS-поздравление c подарком отправлено!</div></li>
 				</ol>
 				<div class="password-wrap">
-					<span class="title">Введите код, полученный в SMS</span>
-					на номер <i>+375 (29) 123-45-67</i>
+					<span class="title">Введите номер телефона, на который хотите отправить подарок</span>
+					На данный номер будет отправлено SMS-поздравление с уникальным кодом для игры  World  of Tanks
 					<div class="steps-cost--number-wrap">
-						<input type="password">
+						<div class="phone-code">
+							<input class="user_phone" type="text" name="Step3[to]">
+						</div>
 					</div>
 					<div class="btn-wrap">
-						<a href="#prize-step4" class="popup popup-btn">Продолжить</a>
+						<span class="popup-btn">Продолжить</span>
+						<a href="#prize-step4" id="toStep4" class="popup popup-btn" style="display: none"></a>
 					</div>
 				</div>
 			</div>
@@ -297,10 +314,13 @@ AppAsset::register($this);
 					Игровое золото, премиум-аккаунт или инвайт-код &#8212; сделайте подарок поклоннику World of Tanks!
 					<strong>Подарок вы можете оплатить вашими баллами &#171;МТС Бонус&#187;</strong>
 				</div>
+				<ul class="steps-list-mobile">
+					<li>Шаг 4 из 4</li>
+				</ul>
 				<ol class="steps-list">
 					<li class="steps-list__item"><div class="item">Выберите подарок и введите свой номер телефона</div></li>
-					<li class="steps-list__item"><div class="item">Введите номер, на который нужно отправить подарок</div></li>
 					<li class="steps-list__item"><div class="item">Введите код для подтверждения</div></li>
+					<li class="steps-list__item"><div class="item">Введите номер, на который нужно отправить подарок</div></li>
 					<li class="steps-list__item steps-list__item--active"><div class="item">SMS-поздравление c подарком отправлено!</div></li>
 				</ol>
 				<div class="password-wrap">

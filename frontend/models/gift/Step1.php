@@ -22,19 +22,32 @@ class Step1 extends Model {
 			// email has to be a valid email address
 			['gift_code', 'integer'],
 			// verifyCode needs to be entered correctly
-			['from', 'string', 'max' => 20],
+			['from', 'string', 'length' => 12],
 		];
 	}
 
+	/**
+	 * @return bool|string
+	 */
 	public function addGift () {
 		if ($this->validate()) {
 
 			$gift = new Gift();
 			$gift->setAttributes($this->getAttributes());
+			$gift->validation_code = $this->_setValidationCode();
 
-			if($gift->save())
-				return Yii::$app->db->getLastInsertID() ;
+			if($gift->save()) {
+				$gift->sendValidationCode();
+				return $gift->id;
+			}
 		}
 		return false;
+	}
+
+	/**
+	 * @return string
+	 */
+	private function _setValidationCode() {
+		return Yii::$app->security->generateRandomString(6);
 	}
 }

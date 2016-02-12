@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use SoapClient;
@@ -77,24 +78,54 @@ class SiteController extends BaseController
 	}
 
 	public function actionSoap () {
-		$wsdl = Yii::getAlias('@frontend').'/'.Yii::$app->params['wsdl'];
+		$wsdl = Yii::$app->params['wsdl'];
 		$client = new SoapClient($wsdl, [
 			'cache_wsdl' => WSDL_CACHE_NONE,
 			'exceptions' => 1,
 			'soap_version' => SOAP_1_2,
 		]);
-		$result = $client->InvokeMethod([
-			'Methodname' => 'MTS_Wargaming_GiftList',
-			'MethodParams' => [
-				1026 => [
-					['name' => 'sec_code', 'Value' => ''],
-					['name' => 'sourceid', 'Value' => ''],
-				],
-//				'sourceid' => '...',
-//				['name' => 'sec_code', 'Value' => ''],
-//				['name' => 'sourceid', 'Value' => ''],
-			],
-		]);
-		echo json_encode($result);die;
+
+		//gifts list
+//		$result = $client->InvokeMethod([
+//			'Methodname' => 'MTS_Wargaming_GiftList',
+//			'MethodParams' => [
+//				'DictionaryItem' => [
+//					['Name' => 'sec_code', 'Value' => '1sEVeN_nInE1'],
+//					['Name' => 'sourceid', 'Value' => '185'],
+//				],
+//			],
+//		]);
+
+		//validation code
+//		$result = $client->InvokeMethod([
+//			'Methodname' => 'MTS_SendCode',
+//			'MethodParams' => [
+//				'DictionaryItem' => [
+//					['Name' => 'customer', 'Value' => '3752sdfs4719'],
+//					['Name' => 'code', 'Value' => 'test'],
+//					['Name' => 'sec_code', 'Value' => '1sEVeN_nInE1'],
+//					['Name' => 'sourceid', 'Value' => '185'],
+//				],
+//			],
+//		]);
+
+//		//send gift
+//		$result = $client->InvokeMethod([
+//			'Methodname' => 'MTS_CreateOrder',
+//			'MethodParams' => [
+//				'DictionaryItem' => [
+//					['Name' => 'ident', 'Value' => '375295704718'],
+//					['Name' => 'product', 'Value' => '200'],
+//					['Name' => 'action', 'Value' => '1'],
+//					['Name' => 'sec_code', 'Value' => '1sEVeN_nInE1'],
+//					['Name' => 'sourceid', 'Value' => '185'],
+//					['Name' => 'add_param', 'Value' => 'MSISDN=375295704719;GIFT_ID=1026'],
+//				],
+//			],
+//		]);
+
+
+
+//		echo json_encode($result);die;
 	}
 }

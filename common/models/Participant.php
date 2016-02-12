@@ -37,7 +37,8 @@ class Participant extends \yii\db\ActiveRecord
             [['name', 'phone', 'activity', 'text'], 'required'],
             [['activity', 'winner'], 'integer'],
             [['text'], 'string', 'max' => 200],
-            [['name', 'phone'], 'string', 'max' => 255]
+            ['name', 'string', 'max' => 255],
+            ['phone', 'string', 'length' => 12]
         ];
     }
 

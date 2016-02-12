@@ -31,28 +31,48 @@ $(document).ready(function() {
 
 
 	//hover-main
-	$('.wot-select__item').on('mouseenter',function(){
-		$('.wot-select__item').find('img').animate({opacity: "0.3",},100);
-		$(this).find('img').animate({opacity: "1",},100);
+	if ($(window).width() > 584){
+		$('.wot-select__item').on('mouseenter',function(){
+			$('.wot-select__item').find('img').stop().animate({opacity: "0.3",},100);
+			$(this).find('img').stop().animate({opacity: "1",},100);
 
-		// $('.wot-select__item').find('.select-btn').animate({opacity: "0.4",},100);
-		$(this).find('.select-btn').animate({opacity: "1",},100);
+			$(this).find('.select-btn').stop().animate({opacity: "1",},100);
 
-		$(this).find('.wot-select__item-img__info').animate({opacity: "0",});
-		$(this).siblings('.wot-select__item').find('.wot-select__item-img__info').animate({opacity: "1",});
-	});
-	$('.wot-select__item').on('mouseleave',function(){
-		$('.wot-select__item').find('.select-btn').animate({opacity: "0.4",},100);
-	});
+			$(this).find('.wot-select__item-img__info').stop().animate({opacity: "0",});
+			$(this).siblings('.wot-select__item').find('.wot-select__item-img__info').stop().animate({opacity: "1",});
 
+			if ($(this).find('.wot-select__item-img').hasClass("wot-select__item-img--tank")) {
+				$('.bgblock1').stop().animate({opacity: "1",},300);
+				$('.bgblock2').stop().css('opacity', '0');
+			}else if ($(this).find('.wot-select__item-img').hasClass("wot-select__item-img--prize")) {
+				$('.bgblock2').stop().animate({opacity: "1",},300);
+				$('.bgblock1').stop().css('opacity', '0');
+			};
+		});
+		$('.wot-select__item').on('mouseleave',function(){
+			$('.wot-select__item').find('.select-btn').stop().animate({opacity: "0.4",},100);
+		});
+	}
 
 	if ($(window).width() < 584){
-		$('.wot-select__item-img').appendTo( $('.wot-info__right') );
+		$('body').on('mouseenter', '.select-btn--tank', function(){
+			$('.wot-select__item-img--prize').css('opacity','0');
+			$('.wot-select__item-img--tank').animate({opacity: "1",},100);
+		});
+		$('body').on('mouseenter', '.select-btn--prize', function(){
+			$('.wot-select__item-img--tank').css('opacity','0');
+			$('.wot-select__item-img--prize').animate({opacity: "1",},100);
+		});
 	}
-	else{
-		$('.wot-select__item-img--tank').insertBefore( $('.select-btn--tank') );
-		$('.wot-select__item-img--prize').insertBefore( $('.select-btn--prize') );
-	}
+
+
+	// if ($(window).width() < 584){
+	// 	$('.wot-select__item-img').appendTo( $('.wot-select__item-top'));
+	// }
+	// else{
+	// 	$('.wot-select__item-img--tank').insertBefore( $('.select-btn--tank') );
+	// 	$('.wot-select__item-img--prize').insertBefore( $('.select-btn--prize') );
+	// }
 
 	//MASK
 	if($('.user_phone').length>0){
@@ -96,13 +116,18 @@ $(window).resize(function() {
 
 
 $(window).resize(function() {
-	if ($(window).width() < 584){
-		$('.wot-select__item-img').appendTo( $('.wot-info__right') );
-	}
-	else{
-		$('.wot-select__item-img--tank').insertBefore( $('.select-btn--tank') );
-		$('.wot-select__item-img--prize').insertBefore( $('.select-btn--prize') );
-	}
+	// if ($(window).width() < 584){
+	// 	$('.wot-select__item-img').appendTo( $('.wot-select__item-top'));
+	// }
+	// else{
+	// 	$('.wot-select__item-img--tank').insertBefore( $('.select-btn--tank') );
+	// 	$('.wot-select__item-img--prize').insertBefore( $('.select-btn--prize') );
+	// }
+
+	$('.select-btn').css('opacity','1');
+
+	$('.wot-select__item-img img').css('opacity','1');
+	
 });
 
 // functions

@@ -28,7 +28,7 @@ class TankForm extends Model {
 
 			[['text', 'name'], 'string'],
 
-			['phone', 'string', 'max' => 20]
+			['phone', 'string', 'length' => 12]
 		];
 	}
 

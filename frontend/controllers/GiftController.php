@@ -11,6 +11,7 @@ namespace frontend\controllers;
 use frontend\models\gift\Step2;
 use Yii;
 use frontend\models\gift\Step1;
+use frontend\models\gift\Step3;
 use yii\web\Response;
 
 class GiftController extends BaseController {
@@ -32,8 +33,9 @@ class GiftController extends BaseController {
 		return false;
 	}
 
+
 	/**
-	 * @return bool|string
+	 * @return bool
 	 */
 	public function actionStep2 () {
 		if (Yii::$app->request->isAjax) {
@@ -41,10 +43,27 @@ class GiftController extends BaseController {
 
 			$step2 = new Step2();
 			if($step2->load(Yii::$app->request->post())) {
-				if ($res = $step2->addPhoneTo())
-				return $res;
+				if ($res = $step2->checkIdentity())
+					return true;
 			}
 		}
 		return false;
 	}
+
+	/**
+	 * @return bool|string
+	 */
+	public function actionStep3 () {
+		if (Yii::$app->request->isAjax) {
+			Yii::$app->response->format = Response::FORMAT_JSON;
+
+			$step3 = new Step3();
+			if($step3->load(Yii::$app->request->post())) {
+				if ($step3->addPhoneTo())
+					return true;
+			}
+		}
+		return false;
+	}
+
 }

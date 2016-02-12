@@ -1,21 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: karpovi4
- * Date: 12.02.16
- * Time: 17:20
- */
 
 namespace frontend\models\gift;
 
-
+use Yii;
 use common\models\Gift;
 use yii\base\Model;
 
-class Step2 extends Model  {
+class Step3 extends Model {
 
+	public $to;
 	public $id;
-	public $validation_code;
 
 	/**
 	 * @inheritdoc
@@ -23,23 +17,23 @@ class Step2 extends Model  {
 	public function rules()
 	{
 		return [
-			[['validation_code', 'id'], 'required'],
+			[['to', 'id'], 'required'],
 			['id', 'integer'],
-			['validation_code', 'string', 'length' => 6],
+			['to', 'string', 'length' => 12],
 		];
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function checkIdentity () {
+	public function addPhoneTo () {
 		if ($this->validate()) {
 			$gift = Gift::findOne(['id' => intval($this->id)]);
+			$gift->setAttributes($this->getAttributes());
+			$gift->sendGiftResult();
 
-			if($this->validation_code == $gift->validation_code) {
-				$gift->success = 1;
+			if($gift->success && $gift->send_success) {
 				$gift->save();
-
 				return true;
 			}
 		}

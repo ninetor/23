@@ -11,9 +11,20 @@ $this->title = 'My Yii Application';
 			<div class="wot-info__title">Боевые подарки!</div>
 		</div>
 		<div class="wot-info__right">
-			<p>Пена для бритья, носки или блокнот ― одни и те же подарки на каждый праздник?</p>
-			<p>Выбирайте подарки, которые порадуют: выиграйте танк или обменяйте баллы «МТС Бонус» на <strong>золото, дни премиум-аккаунта</strong> или <strong>инвайт-код</strong> для игры World of Tanks</p>
-			<p>Поделись ссылкой на проект &#8212; подскажите, что вам подарить!</p>
+			<div class="wot-info__right-text">
+				<p>Пена для бритья, носки или блокнот ― одни и те же подарки на каждый праздник?</p>
+				<p>Выбирайте подарки, которые порадуют: выиграйте танк или обменяйте баллы «МТС Бонус» на <strong>золото, дни премиум-аккаунта</strong> или <strong>инвайт-код</strong> для игры World of Tanks</p>
+				<p>Поделись ссылкой на проект &#8212; подскажите, что вам подарить!</p>
+			</div>
+			<div class="wot-select-mobile-item">
+				<div class="wot-select-mobile-item__img">
+					<img src="img/content/tank.png" alt="">
+				</div>
+				<div class="wot-select-mobile-item__txt">
+					<strong>50 танков</strong> Т-34-85М<br>
+					<strong>+5 дней премиум-аккаунта</strong> для игры World of Tanks<br>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="wot-select">

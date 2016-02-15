@@ -13,13 +13,33 @@ $(document).ready(function() {
         'transitionOut'     : 'none',
         padding: 0,
         maxWidth	: 1160,
-        autoDimensions: false,
+        closeBtn : false,
+        
+
         helpers: {
-		    overlay: {
-		      locked: false,
-		    }
-		}
+            overlay: {
+                closeClick: false,
+                locked: true,
+                scrollOutside: false,
+                closeBtn : false,
+                // css : { 'overflow' : 'hidden' }
+            }
+        },
     });
+    $('a.fancy-close').click(function(e){
+        e.preventDefault();
+        $.fancybox.close();
+    });
+
+
+    $(".www").fancybox({
+        helpers: {
+            overlay: {
+                locked: true,
+            }
+        },
+    });
+
 
     //MOBILE MENU
 	$('.menu-btn').click(function(){

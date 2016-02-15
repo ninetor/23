@@ -22,19 +22,23 @@ class TankController extends BaseController {
 					->where('id != :id', ['id' => $id])
 					->orderBy('RAND()')
 					->one();
-				return ['id' => $new_activity->id, 'text' => $new_activity->text];
+				return $new_activity;
 			}
 		}
 		return false;
 	}
 
+	/**
+	 * @return bool
+	 */
 	public  function actionAddparticipant() {
 		if (Yii::$app->request->isAjax) {
 			Yii::$app->response->format = Response::FORMAT_JSON;
 
 			$model = new TankForm();
-			if ($model->load(Yii::$app->request->post()) && $model->addParticipant())
-				return true;
+			if ($model->load(Yii::$app->request->post()))
+				$res = $model->addParticipant();
+				return $res;
 		}
 
 		return false;

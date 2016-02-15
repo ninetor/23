@@ -86,15 +86,15 @@ class SiteController extends BaseController
 		]);
 
 		//gifts list
-//		$result = $client->InvokeMethod([
-//			'Methodname' => 'MTS_Wargaming_GiftList',
-//			'MethodParams' => [
-//				'DictionaryItem' => [
-//					['Name' => 'sec_code', 'Value' => '1sEVeN_nInE1'],
-//					['Name' => 'sourceid', 'Value' => '185'],
-//				],
-//			],
-//		]);
+		$result = $client->InvokeMethod([
+			'Methodname' => 'MTS_Wargaming_GiftList',
+			'MethodParams' => [
+				'DictionaryItem' => [
+					['Name' => 'sec_code', 'Value' => '1sEVeN_nInE1'],
+					['Name' => 'sourceid', 'Value' => '185'],
+				],
+			],
+		]);
 
 		//validation code
 //		$result = $client->InvokeMethod([
@@ -114,18 +114,18 @@ class SiteController extends BaseController
 //			'Methodname' => 'MTS_CreateOrder',
 //			'MethodParams' => [
 //				'DictionaryItem' => [
-//					['Name' => 'ident', 'Value' => '375295704718'],
+//					['Name' => 'ident', 'Value' => '375295704719'],
 //					['Name' => 'product', 'Value' => '200'],
 //					['Name' => 'action', 'Value' => '1'],
 //					['Name' => 'sec_code', 'Value' => '1sEVeN_nInE1'],
-//					['Name' => 'sourceid', 'Value' => '185'],
-//					['Name' => 'add_param', 'Value' => 'MSISDN=375295704719;GIFT_ID=1026'],
+//					['Name' => 'source_id', 'Value' => '185'],
+//					['Name' => 'add_param', 'Value' => 'MSISDN=375293278146;GIFT_ID=1168'],
 //				],
 //			],
 //		]);
 
 
 
-//		echo json_encode($result);die;
+		echo json_encode($result);die;
 	}
 }

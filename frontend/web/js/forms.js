@@ -4,6 +4,10 @@ $(document).ready(function() {
 	$('#prize-step1').find('.btn-wrap span').on('click', function () {
 		var data = {};
 		var phoneNumber = $('#prize-step1').find('input[name="Step1[from]"]').val();
+		console.log(phoneNumber);
+		$('#prize-step2').find('.password-wrap i').text('+375 '+phoneNumber);
+
+
 
 		data['Step1[gift_code]'] = $('#prize-step1').find('input[name="Step1[gift_code]"]:checked').val();
 		data['Step1[from]'] = proccessPhone(phoneNumber);
@@ -12,9 +16,14 @@ $(document).ready(function() {
 			'/gift_step1',
 			data,
 			function (res) {
-				if(res) {
+				if(parseInt(res)) {
 					giftObject.id = parseInt(res);
 					$('#toStep2').click();
+				} else {
+					var msg = res.from[0];
+					$('#prize-step1').find('div.error-wrap')
+						.addClass('active').find('.error-msg')
+						.text(msg);
 				}
 			}
 		);
@@ -29,9 +38,16 @@ $(document).ready(function() {
 			'/gift_step2',
 			data,
 			function (res) {
-				if(res) {
+				if(res == true) {
 					$('#toStep3').click();
+
+				} else {
+					var msg = res.validation_code[0];
+					$('#prize-step2').find('div.error-wrap')
+						.addClass('active').find('.error-msg')
+						.text(msg);
 				}
+
 			}
 		);
 	});
@@ -46,11 +62,21 @@ $(document).ready(function() {
 			'/gift_step3',
 			data,
 			function (res) {
-				if(res) {
+				if(res == true) {
 					$('#toStep4').click();
+				} else {
+					var msg = res.to[0];
+					$('#prize-step3').find('div.error-wrap')
+						.addClass('active').find('.error-msg')
+						.text(msg);
 				}
 			}
 		);
+	});
+	$('#prize-step4').find('.social-btn').on('click', function () {
+		var share_btn = $(this).attr('data-share');
+		console.log(share_btn);
+		Share[share_btn]();
 	});
 
 	$('#tank-step2').find('a.other').on('click', function () {
@@ -62,15 +88,18 @@ $(document).ready(function() {
 			data,
 			function (res) {
 				if (res) {
+					console.log(res);
 					$('#tank-step2').find('.current_activity').val(res.id);
 					$('#tank-step2').find('.prize-task').val(res.text);
+					$('#tank-step2').find('.tank-cause').text(res.cause);
+					$('#tank-step2').find('#tank-message').attr('placeholder', res.example);
 
 
 				}
 			}
 		);
-	})
-	$('#tank-step2').find('span.social-btn').on('click', function () {
+	});
+	$('#tank-step2').find('.btn-wrap span').on('click', function () {
 		var data = {};
 		var phoneNumber = $('#tank-step2').find('input[name="TankForm[phone]"]').val();
 
@@ -78,36 +107,112 @@ $(document).ready(function() {
 		data['TankForm[name]'] = $('#tank-step2').find('input[name="TankForm[name]"]').val();
 		data['TankForm[phone]'] = proccessPhone(phoneNumber);
 		data['TankForm[text]'] = $('#tank-step2').find('textarea[name="TankForm[text]"]').val();
+		$('.error-msg').text('');
+
+		if (window.containsMat(data['TankForm[text]'])) {
+			$('#tank-step2').find('div.error-text').text('К сожалению, матерщина запрещена');
+			return false;
+		}
+		if (window.containsMat(data['TankForm[name]'])) {
+			$('#tank-step2').find('div.error-name').text('К сожалению, матерщина запрещена');
+			return false;
+		}
 
 		$.post(
 			'/addparticipant',
 			data,
 			function (res) {
-				if (res) {
-					console.log(res);
+				if (res == true) {
 					$('#tank_toStep3').click();
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+				} else {
+					for(var result in res) {
+						$('#tank-step2')
+							.find('input[name="TankForm['+result+']"], textarea[name="TankForm['+res[result]+']"]')
+							.addClass('active');
+						$('#tank-step2')
+							.find('div.error-'+result)
+							.text(res[result][0]);
+					}
 				}
 			}
 		);
 	});
+	$('#tank-step3').find('.social-btn').on('click', function () {
+		var share_btn = $(this).attr('data-share');
+		console.log(share_btn);
+		Share[share_btn]();
+	});
+
+	$('#prize-step1').find('input[type="radio"]').eq(0).attr('checked', true);
 
 	Share = {
 		url: location.protocol+'//'+location.hostname,
 		title_main: 'Обменивайте баллы «МТС Бонус» на золото, дни премиум-аккаунта или инвайт-код для WoT!',
+		title_tank: 'Хочу вместо банальных подарков танк для World of Tanks!',
+		title_prize: 'Обменивайте баллы «МТС Бонус» на золото, дни премиум-аккаунта или инвайт-код для WoT!',
+
+		name_prize: 'Медаль за #БоевыеПодарки от МТС и WoT!',
+		name_fb: '#БоевыеПодарки МТС',
 
 		vk_main: function() {
 			url  = 'http://vkontakte.ru/share.php?';
 			url += 'url='          + encodeURIComponent(this.url);
-			url += '&title='       + encodeURIComponent(this.title_main);
+			url += '&title='          + encodeURIComponent(this.name_fb);
+			url += '&description='       + encodeURIComponent(this.title_main);
 			url += '&image='       + this.url+'/img/share/1_5.jpg';
+			url += '&noparse=true';
+			Share.popup(url);
+		},
+		vk_tank: function() {
+			url  = 'http://vkontakte.ru/share.php?';
+			url += 'url='          + encodeURIComponent(this.url);
+			url += '&title='          + encodeURIComponent(this.name_fb);
+			url += '&description='       + encodeURIComponent(this.title_tank);
+			url += '&image='       + this.url+'/img/share/2_5.jpg';
+			url += '&noparse=true';
+			Share.popup(url);
+		},
+		vk_prize: function() {
+			url  = 'http://vkontakte.ru/share.php?';
+			url += 'url='          + encodeURIComponent(this.url);
+			url += '&title='          + encodeURIComponent(this.name_prize);
+			url += '&description='       + encodeURIComponent(this.title_prize);
+			url += '&image='       + this.url+'/img/share/3_5.jpg';
 			url += '&noparse=true';
 			Share.popup(url);
 		},
 		fb_main: function() {
 			url  = 'https://www.facebook.com/dialog/feed?';
-			url += 'caption='     + encodeURIComponent(this.title_main);
+			url += 'app_id='     + 799191360227615;
+			url += '&description='     + encodeURIComponent(this.title_main);
 			url += '&link='       + encodeURIComponent(this.url);
+			url += '&name='       + encodeURIComponent(this.name_fb);
+			url +=  '&redirect_uri=http://facebook.com/';
+			url +=  '&display=popup';
 			url += '&picture=' + this.url+'/img/share/1_1.jpg';
+			Share.popup(url);
+		},
+		fb_tank: function() {
+			url  = 'https://www.facebook.com/dialog/feed?';
+			url += 'app_id='     + 799191360227615;
+			url += '&description='     + encodeURIComponent(this.title_tank);
+			url += '&link='       + encodeURIComponent(this.url);
+			url += '&name='       + encodeURIComponent(this.name_fb);
+			url +=  '&redirect_uri=http://facebook.com/';
+			url +=  '&display=popup';
+			url += '&picture=' + this.url+'/img/share/2_1.jpg';
+			Share.popup(url);
+		},
+		fb_prize: function() {
+			url  = 'https://www.facebook.com/dialog/feed?';
+			url += 'app_id='     + 799191360227615;
+			url += '&description='     + encodeURIComponent(this.title_prize);
+			url += '&link='       + encodeURIComponent(this.url);
+			url += '&name='       + encodeURIComponent(this.name_prize);
+			url +=  '&redirect_uri=http://facebook.com/';
+			url +=  '&display=popup';
+			url += '&picture=' + this.url+'/img/share/3_1.jpg';
 			Share.popup(url);
 		},
 		tw_main: function() {

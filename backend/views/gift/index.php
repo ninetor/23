@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'from',
             'to',
             'gift_code',
+            'order_id',
         ],
     ]); ?>
 

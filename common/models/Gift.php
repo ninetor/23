@@ -42,7 +42,7 @@ class Gift extends \yii\db\ActiveRecord
         return [
             [['date'], 'safe'],
             [['from', 'gift_code', 'validation_code'], 'required'],
-            [['gift_code'], 'string', 'max' => 255],
+            [['gift_code', 'order_id'], 'string', 'max' => 255],
             [['from', 'to'], 'string', 'length' => 12],
             ['validation_code', 'string', 'length' => 6],
         ];
@@ -59,6 +59,7 @@ class Gift extends \yii\db\ActiveRecord
             'from' => 'From',
             'to' => 'To',
             'gift_code' => 'Gift Code',
+	        'order_id' => 'Order id'
         ];
     }
 
@@ -79,18 +80,23 @@ class Gift extends \yii\db\ActiveRecord
 	 * @return bool
 	 */
 	public function sendGiftResult() {
-		$response = $this->_sendGiftRequest();
-		if (is_array($response) && count($response)) {
-			foreach($response as $resp_msg) {
-				switch ($resp_msg->Name) {
-//					case 'order_id':
-//						$this->order_id = $resp_msg->Value;
-//						break;
-					case 'result_code':
-						$this->send_success = (int)$resp_msg->Value == 1 ? true : false;
-						break;
+		if (!$this->order_id) {
+			$response = $this->_sendGiftRequest();
+			if (is_array($response) && count($response)) {
+				foreach($response as $resp_msg) {
+					switch ($resp_msg->Name) {
+						case 'order_id':
+							$order = $resp_msg->Value;
+							break;
+						case 'result_code':
+							$this->send_success = (int)$resp_msg->Value == 1  ? true : false;
+							break;
+					}
 				}
+
+				$this->order_id = $order;
 			}
+
 		}
 		return false;
 	}

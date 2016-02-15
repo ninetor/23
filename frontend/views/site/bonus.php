@@ -45,8 +45,8 @@
 				</ul>
 			</div>
 		</div>
-
-		<h2 class="centered short">Как узнать, сколько у меня баллов «МТС Бонус»?</h2>
+		​
+		<h2 class="centered short" id="get_to_know_points">Как узнать, сколько у меня баллов «МТС Бонус»?</h2>
 		<p class="centered">Проверить баланс бонусного счёта «МТС Бонус» можно одним из следующих способов:</p>
 		<div class="bonus-question">
 			<div class="margin-item">
@@ -87,14 +87,14 @@
 					</li>
 				</ul>
 			</div>
-			<h2 class="centered">Скачайте беслатно приложение «Мой МТС»?</h2>
+			<h2 class="centered">Скачайте беслатно приложение «Мой МТС»</h2>
 			<div class="download-links">
-				<a href="#"><img src="img/content/google.png" alt=""></a>
-				<a href="#"><img src="img/content/app-store.png" alt=""></a>
+				<a href="https://play.google.com/store/apps/details?id=by.mts.client"  target="_blank"><img src="img/content/google.png" alt=""></a>
+				<a href="https://itunes.apple.com/by/app/moj-mts/id979883510"  target="_blank"><img src="img/content/app-store.png" alt=""></a>
 			</div>
 		</div>
 		<h2 class="centered">На что можно потратить бонусные баллы?</h2>
-		<p class="centered">Специальная акция к 23 февраля: вы можете потратить баллы на «боевые подарки» World of Tanks &mdash; отправьте их себе или другу!</p>
+		<p class="centered"><a href="#prize-step1" class="popup">Специальная акция к 23 февраля</a>: вы можете потратить баллы на «боевые подарки» World of Tanks &mdash; отправьте их себе или другу!</p>
 		<div class="page-table-wrap">
 			<div class="page-table">
 				<div class="page-table__row">
@@ -112,7 +112,7 @@
 					<div class="page-table__cell">100 игрового золота</div>
 					<div class="page-table__cell centered"><span class="points">350</span></div>
 				</div>
-
+				​
 				<div class="page-table__row">
 					<div class="page-table__cell">Бонус код «World of Tanks 250 gold»</div>
 					<div class="page-table__cell">250 игрового золота</div>
@@ -130,6 +130,6 @@
 				</div>
 			</div>
 		</div>
-		<p class="view">Все виды бонусов можно посмотреть в <a href="http://bonus.mts.by/catalogue/" target="_blank">каталоге(www.bonus.mts.by/catalogue/)</a> на сайте программы.</p>
+		<p class="view">Все виды бонусов можно посмотреть в <a href="http://bonus.mts.by/catalogue/" target="_blank">каталоге (bonus.mts.by/catalogue/)</a> на сайте программы.</p>
 	</div>
 </div>

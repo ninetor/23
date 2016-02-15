@@ -34,7 +34,7 @@ class Participant extends \yii\db\ActiveRecord
     {
         return [
             [['date'], 'safe'],
-            [['name', 'phone', 'activity', 'text'], 'required'],
+            [['name', 'activity', 'text'], 'required'],
             [['activity', 'winner'], 'integer'],
             [['text'], 'string', 'max' => 200],
             ['name', 'string', 'max' => 255],

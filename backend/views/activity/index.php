@@ -22,7 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+
             'text:ntext',
+	        'cause',
+			'example:ntext',
 
 	        [
 		        'header'=>'Action',

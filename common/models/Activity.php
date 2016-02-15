@@ -28,8 +28,9 @@ class Activity extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['text'], 'required'],
-            [['text'], 'string']
+            [['text', 'cause', 'example'], 'required'],
+            [['text', 'example'], 'string'],
+	        ['cause', 'string', 'max' => 255]
         ];
     }
 
@@ -41,6 +42,8 @@ class Activity extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'text' => 'Text',
+            'cause' => 'Cause',
+            'example' => 'Example',
         ];
     }
 

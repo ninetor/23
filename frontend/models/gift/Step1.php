@@ -17,11 +17,9 @@ class Step1 extends Model {
 	public function rules()
 	{
 		return [
-			// name, email, subject and body are required
-			[['gift_code', 'from'], 'required'],
-			// email has to be a valid email address
+			['gift_code', 'required'],
+			['from', 'required', 'message' => 'Введите номер телефона'],
 			['gift_code', 'integer'],
-			// verifyCode needs to be entered correctly
 			['from', 'string', 'length' => 12],
 		];
 	}
@@ -40,8 +38,10 @@ class Step1 extends Model {
 				$gift->sendValidationCode();
 				return $gift->id;
 			}
+		} else {
+			return $this->getErrors();
 		}
-		return false;
+
 	}
 
 	/**

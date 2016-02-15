@@ -17,17 +17,22 @@ if (isset($this->params['presents']))
 	$presents = $this->params['presents'];
 //var_dump($activity);die;
 
+$controller = Yii::$app->controller;
+$default_controller = Yii::$app->defaultRoute;
+$isHome = ($controller->id === $default_controller && $controller->action->id === $controller->defaultAction) ? true : false;
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" >
+<html lang="<?= Yii::$app->language ?>" >
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
+	<meta property="og:title" content="Хочу прокатиться на #4GтаксиМТС! " />
 	<meta property="og:image" content="http://tanki.mts.by/img/share/1_1.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title>Боевые подарки от МТС</title>
     <?php $this->head() ?>
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -46,7 +51,9 @@ AppAsset::register($this);
 	<header class="page-header">
 		<div class="container">
 			<div class="top-logo">
-				<img src="img/content/logomts.png" alt="">
+				<?php if(!$isHome) { ?><a href="<?= Url::to(['/']); ?>"><?php } ?>
+					<img src="img/content/logomts.png" alt="">
+				<?php if(!$isHome) { ?></a><?php } ?>
 			</div>
 			<a href="#" class="menu-btn">
 				<span class="burger-icon"></span>
@@ -59,12 +66,12 @@ AppAsset::register($this);
 			<nav class="top-nav">
 				<a href="#tank-step1" class="top-nav__item popup">Выиграть танк</a>
 				<a href="#prize-step1" class="top-nav__item popup">Сделать подарок</a>
-				<?= Html::a('Мтс бонус', Url::to(['site/bonus']), ['class' => 'top-nav__item']); ?>
+				<?= Html::a('МТС бонус', Url::to(['site/bonus']), ['class' => 'top-nav__item']); ?>
 				<?= Html::a('Правила', Url::to(['site/rules']), ['class' => 'top-nav__item']); ?>
 			</nav>
 		</div>
 	</header><!--END HEADER-->
-	<div class="page-content">
+	<div class="page-content <?= $isHome ? 'page-content--index' : null; ?>">
 		<?= $content?>
 	</div>
 </div><!-- END LAYOUT-->
@@ -73,15 +80,15 @@ AppAsset::register($this);
 <!-- MOBILE-MENU-->
 <div class="menu-right">
 	<ul class="menu-right__list">
-		<li class="menu-right__item"><a href="#">Выиграть танк</a></li>
-		<li class="menu-right__item"><a href="#">Сделать подарок</a></li>
-		<li class="menu-right__item"><a href="#">Мтс бонус</a></li>
-		<li class="menu-right__item"><a href="#">Правила</a></li>
+		<li class="menu-right__item"><a href="#tank-step1" class="popup">Выиграть танк</a></li>
+		<li class="menu-right__item"><a href="#prize-step1" class="popup">Сделать подарок</a></li>
+		<li class="menu-right__item"><a href="<?= Url::to(['site/bonus']);?>">МТС бонус</a></li>
+		<li class="menu-right__item"><a href="<?= Url::to(['site/rules']);?>">Правила</a></li>
 	</ul>
 	<div class="socials">
-		<a href="#" class="socials__item vk"><span></span></a>
-		<a href="#" class="socials__item facebook"><span></span></a>
-		<a href="#" class="socials__item twitter"><span></span></a>
+		<a href="#" data-share="vk_main"  class="socials__item vk"><span></span></a>
+		<a href="#"data-share="fb_main"  class="socials__item facebook"><span></span></a>
+		<a href="#"data-share="tw_main"  class="socials__item twitter"><span></span></a>
 	</div>
 </div><!--END MOBILE-MENU-->
 
@@ -89,11 +96,12 @@ AppAsset::register($this);
 <div class="popup-content">
 	<form action="#" method="post">
 		<div id="tank-step1">
+			<a href="#" class="fancy-close"></a>
 			<div class="steps-wrap--tanks">
 				<div class="popup-content__title">Выиграйте танк</div>
 				<div class="popup-content__info">
 					Для себя или в подарок &#8212; участвуйте в творческом конкурсе и выиграйте:
-					<strong>1 из 50 танков Т-34-85М + 5 дней премиум-аккаунта</strong>
+					<strong>1 из 50 танков Т-34-85М + 7 дней премиум-аккаунта</strong>
 					<span class="clarification">Зовите участвовать друзей: чем больше завок, тем больше шансов!</span>
 				</div>
 				<div class="tank-steps-list">
@@ -125,7 +133,7 @@ AppAsset::register($this);
 									<img src="img/content/tank-step3.png" alt="">
 								</div>
 								<div class="tank-steps-list__inner-info">
-									Получите шанс выиграть Т-34-85М<br> + 5 дней премиум-аккаунта
+									Получите шанс выиграть Т-34-85М<br> + 7 дней премиум-аккаунта
 								</div>
 							</div>
 						</li>
@@ -139,52 +147,65 @@ AppAsset::register($this);
 				</div>
 			</div>
 		</div>
-
 		<div id="tank-step2">
+			<a href="#" class="fancy-close"></a>
 			<div class="steps-wrap--tanks">
 				<div class="popup-content__title">Задание для конкурса</div>
 				<div class="task">
 					<label for="tank-task"><a href="#" class="other">Другое</a>Задание</label>
 					<div class="input-wrap">
-						<input type="text" id="tank-task" value="<?= $activity->text; ?>" class="prize-task input-bold">
+						<input type="text" readonly id="tank-task" value="<?= $activity->text; ?>" class="prize-task input-bold">
 						<input type="hidden" class="current_activity" name="TankForm[activity]" value="<?= $activity->id;?>">
 						<a href="#" class="other">Другое</a>
 					</div>
-					<label for="tank-message">Напишите, почему хотите получить танк, а не носки:</label>
-					<textarea id="tank-message" name="TankForm[text]" placeholder="Например: «У меня столько носков, что я могу построить из них крепость!»"></textarea>
+					<label class="tank-cause" for="tank-message"><?= $activity->cause; ?></label>
+					<div class="error-wrap">
+						<textarea id="tank-message" name="TankForm[text]" placeholder="<?= $activity->example ?>"></textarea>
+						<div class="error-msg error-text"></div>
+					</div>
 					<label for="tank-name">Ваше имя и номер телефона:</label>
 
 					<div class="input-wrap">
-						<input type="text" id="tank-name" class="input-half" name="TankForm[name]" placeholder="Имя">
-						<div class="phone-code">
-							<input type="text" id="tank-phone" name="TankForm[phone]" class="input-half user_phone" placeholder="">
+						<div class="error-wrap input-half">
+							<input type="text" id="tank-name" name="TankForm[name]" placeholder="Имя">
+							<div class="error-msg error-name"></div>
+						</div>
+						<div class="error-wrap input-half">
+							<div class="phone-code">
+								<input type="tel" id="tank-phone" name="TankForm[phone]" class="user_phone" placeholder="">
+							</div>
+							<div class="error-msg error-phone"></div>
 						</div>
 					</div>
 					<span class="clarification">Номер телефона будет использован для связи с победителем и не будет опубликован на сайте</span>
 				</div>
 				<div class="btn-wrap">
-					<div class="btn-wrap__title">Поделитесь своим вариантом в социальной сети</div>
-					<a href="#tank-step3" id="tank_toStep3" class="popup popup-btn" style="display: none"></a>
-					<div class="social-btn-wrap">
-						<span class="social-btn social-btn--vk"><i></i>Вконтакте</span>
-					</div>
-					<div class="social-btn-wrap">
-						<span class="social-btn social-btn--fb"><i></i>Facebook</span>
-					</div>
+					<span class="popup-btn">Продолжить</span>
+					<a href="#prize-step4" id="toStep4" class="popup popup-btn" style="display: none"></a>
 				</div>
 			</div>
 		</div>
-
 		<div id="tank-step3">
+			<a href="#" class="fancy-close"></a>
 			<div class="steps-wrap--tanks">
+				<div class="popup-content__title">Спасибо за участие!</div>
+				<div class="btn-wrap">
+					<div class="btn-wrap__title">Поделитесь своим вариантом в социальной сети</div>
+					<a href="#tank-step3" id="tank_toStep3" class="popup popup-btn" style="display: none"></a>
+					<div class="social-btn-wrap">
+						<span class="social-btn social-btn--vk" data-share="vk_tank"><i></i>Вконтакте</span>
+					</div>
+					<div class="social-btn-wrap">
+						<span class="social-btn social-btn--fb" data-share="fb_tank"><i></i>Facebook</span>
+					</div>
+				</div>
 				<div class="final-popup">
-					<div class="popup-content__title">Спасибо за участие!</div>
 					<div class="popup-content__info">
 						Для абонентов МТС &#8212; уникальная возможность:<br>
 						обменяйте баллы  &#171;МТС Бонус&#187; на золото, премиум аккаунт<br>
 						или инвайт-код World of Tanks
 						<strong>Сделайте подарок себе или другу!</strong>
-						<a href="#">Подробнее</a>
+						<a href="#prize-step1" class="popup">Подробнее</a>
 					</div>
 				</div>
 			</div>
@@ -193,6 +214,15 @@ AppAsset::register($this);
 
 	<form action="#" method="post">
 		<div id="prize-step1">
+			<div class="preloader-wrap" id="loadersoc">
+				<div class="preloader">
+					<div class="circ1"></div>
+					<div class="circ2"></div>
+					<div class="circ3"></div>
+					<div class="circ4"></div>
+				</div>
+			</div>
+			<a href="#" class="fancy-close"></a>
 			<div class="steps-wrap">
 				<div class="popup-content__title">Сделать подарок</div>
 				<div class="popup-content__info">
@@ -234,11 +264,14 @@ AppAsset::register($this);
 					<div class="steps-cost--number">
 						<span class="title">Введите свой номер МТС для обмена баллов на выбранный подарок</span>
 						<div class="steps-cost--number-wrap">
-							<div class="phone-code">
-								<input class="user_phone" type="text" name="Step1[from]">
-							</div>
+							<div class="error-wrap">
+								<div class="phone-code">
+									<input class="user_phone" type="tel" name="Step1[from]">
+								</div>
+							<div class="error-msg"></div>
 						</div>
-						<a href="<?= Url::to(['site/bonus']);?>">Как узнать сколько у меня баллов &#171;МТС Бонус&#187; ?</a>
+						</div>
+						<a href="<?= Url::to(['site/bonus', '#' => 'get_to_know_points']);?>">Как узнать сколько у меня баллов &#171;МТС Бонус&#187; ?</a>
 					</div>
 				</div>
 				<div class="btn-wrap">
@@ -248,6 +281,7 @@ AppAsset::register($this);
 			</div>
 		</div>
 		<div id="prize-step2">
+			<a href="#" class="fancy-close"></a>
 			<div class="steps-wrap">
 				<div class="popup-content__title">Сделать подарок</div>
 				<div class="popup-content__info">
@@ -267,7 +301,10 @@ AppAsset::register($this);
 					<span class="title">Введите код, полученный в SMS</span>
 					на номер <i>+375 (29) 123-45-67</i>
 					<div class="steps-cost--number-wrap">
-						<input type="password" name="Step2[validation_code]">
+						<div class="error-wrap error-wrap--short">
+							<input type="text" name="Step2[validation_code]">
+							<div class="error-msg"></div>
+						</div>
 					</div>
 					<div class="btn-wrap">
 						<span class="popup-btn">Продолжить</span>
@@ -277,6 +314,7 @@ AppAsset::register($this);
 			</div>
 		</div>
 		<div id="prize-step3">
+			<a href="#" class="fancy-close"></a>
 			<div class="steps-wrap">
 				<div class="popup-content__title">Сделать подарок</div>
 				<div class="popup-content__info">
@@ -296,8 +334,11 @@ AppAsset::register($this);
 					<span class="title">Введите номер телефона, на который хотите отправить подарок</span>
 					На данный номер будет отправлено SMS-поздравление с уникальным кодом для игры  World  of Tanks
 					<div class="steps-cost--number-wrap">
-						<div class="phone-code">
-							<input class="user_phone" type="text" name="Step3[to]">
+							<div class="error-wrap error-wrap--short">
+								<div class="phone-code">
+									<input class="user_phone" type="tel" name="Step3[to]">
+								</div>
+							<div class="error-msg"></div>
 						</div>
 					</div>
 					<div class="btn-wrap">
@@ -308,6 +349,7 @@ AppAsset::register($this);
 			</div>
 		</div>
 		<div id="prize-step4">
+			<a href="#" class="fancy-close"></a>
 			<div class="steps-wrap">
 				<div class="popup-content__title">Сделать подарок</div>
 				<div class="popup-content__info">
@@ -332,15 +374,15 @@ AppAsset::register($this);
 						Вам &#8212; медаль за боевой подарок! Заберите себе на стену:
 					</div>
 					<div class="btn-wrap">
-						<a href="#" class="social-btn social-btn--vk"><i></i>Вконтакте</a>
-						<a href="#" class="social-btn social-btn--fb"><i></i>Facebook</a>
+						<a href="#" class="social-btn social-btn--vk" data-share="vk_prize"><i></i>Вконтакте</a>
+						<a href="#" class="social-btn social-btn--fb" data-share="fb_prize"><i></i>Facebook</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</form>
-
 	<div id="members">
+		<a href="#" class="fancy-close"></a>
 		<div class="steps-wrap--members">
 			<ul class="tabs">
 				<li><a href="#tab1">Участники</a></li>
@@ -351,90 +393,127 @@ AppAsset::register($this);
 					<div class="member-list">
 						<div class="member-item">
 							<div class="member-item__name">
-								Игорь Селиверстов
-								<span class="member-item__date">27 ноября</span>
+								Валерий Мыцик
+								<span class="member-item__date">15 февраля</span>
 							</div>
 							<div class="member-item__info">
-								Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Вдали от всех живут они в буквенных домах на берегу Семантика большого языкового океана.
+								Надоели эти кружки! Их у меня сто, а такого танка ни одного! Подарите в честь праздника танк!
 							</div>
 						</div>
 						<div class="member-item">
 							<div class="member-item__name">
-								Андрей Волосюк
-								<span class="member-item__date">27 ноября</span>
+								Сергей Бубнов
+								<span class="member-item__date">15 февраля</span>
 							</div>
 							<div class="member-item__info">
-								Маленький ручеек Даль журчит по всей стране и обеспечивает ее всеми необходимыми правилами. Эта парадигматическая страна, в которой жаренные члены предложения залетают прямо в рот.
+								Подарите мне танк или пусть вам самим на 23 февраля все дарят только бритвы!
 							</div>
 						</div>
 						<div class="member-item">
 							<div class="member-item__name">
-								Алексей Синкевич
-								<span class="member-item__date">27 ноября</span>
+								Александр Живушко
+								<span class="member-item__date">15 февраля</span>
 							</div>
 							<div class="member-item__info">
-								Однажды одна маленькая строчка рыбного текста по имени Lorem ipsum решила выйти в большой мир грамматики. Великий Оксмокс предупреждал ее о злых запятых, диких знаках вопроса и коварных точках с запятой, но текст не дал сбить себя с толку.
+								Подарите мне танк, а не гель для душа, потому что я настоящий мужик!
 							</div>
 						</div>
 						<div class="member-item">
 							<div class="member-item__name">
-								Игорь Селиверстов
-								<span class="member-item__date">27 ноября</span>
+								Петр Герасименко
+								<span class="member-item__date">15 февраля</span>
 							</div>
 							<div class="member-item__info">
-								Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Вдали от всех живут они в буквенных домах на берегу Семантика большого языкового океана.
+								Носки, конечно, вещь нужная, но танк помасштабнее будет! Выбираю танк!
+							</div>
+						</div>
+						<div class="member-item">
+							<div class="member-item__name">
+								Виталий Баранов
+								<span class="member-item__date">15 февраля</span>
+							</div>
+							<div class="member-item__info">
+								Дезодорант – это пшик! А танк – это танк. Подарите мне танк!
+							</div>
+						</div>
+						<div class="member-item">
+							<div class="member-item__name">
+								Алексей Рыбаков
+								<span class="member-item__date">15 февраля</span>
+							</div>
+							<div class="member-item__info">
+								Не хочу свитер, хочу танк! Очень!
+							</div>
+						</div>
+						<div class="member-item">
+							<div class="member-item__name">
+								Василий Гринчук
+								<span class="member-item__date">15 февраля</span>
+							</div>
+							<div class="member-item__info">
+								Разве можно сравнить ТАНК и БЛОКНОТ? ТАНК и БЛОКНОТ, КАРЛ! Подарите мне танк!
+							</div>
+						</div>
+						<div class="member-item">
+							<div class="member-item__name">
+								Александр Потапов
+								<span class="member-item__date">15 февраля</span>
+							</div>
+							<div class="member-item__info">
+								Дедушка Мороз, на Новый год ты мне подарил гель для душа!!!! Пожалуйста, исправься, и на 23 февраля подари мне танк!!!
 							</div>
 						</div>
 					</div>
-					<div class="paging">
-						<a href="#">Пред</a>
-						<a href="#">1</a>
-						<span class="active">2</span>
-						<a href="#">3</a>
-						<span class="etc">...</span>
-						<a href="#">15</a>
-						<a href="#">След</a>
-					</div>
+					<!--<div class="paging">
+							<a href="#">Пред</a>
+							<a href="#">1</a>
+							<span class="active">2</span>
+							<a href="#">3</a>
+							<span class="etc">...</span>
+							<a href="#">15</a>
+							<a href="#">След</a>
+						</div>-->
 				</div>
 				<div id="tab2" class="tab_content">
-					<div class="members-list">
-						<div class="member-item">
-							<div class="member-item__name">
-								Андрей Волосюк
-								<span class="member-item__date">27 ноября</span>
-							</div>
-							<div class="member-item__info">
-								Маленький ручеек Даль журчит по всей стране и обеспечивает ее всеми необходимыми правилами. Эта парадигматическая страна, в которой жаренные члены предложения залетают прямо в рот.
-							</div>
-						</div>
-						<div class="member-item">
-							<div class="member-item__name">
-								Алексей Синкевич
-								<span class="member-item__date">27 ноября</span>
-							</div>
-							<div class="member-item__info">
-								Однажды одна маленькая строчка рыбного текста по имени Lorem ipsum решила выйти в большой мир грамматики. Великий Оксмокс предупреждал ее о злых запятых, диких знаках вопроса и коварных точках с запятой, но текст не дал сбить себя с толку.
-							</div>
-						</div>
-						<div class="member-item">
-							<div class="member-item__name">
-								Игорь Селиверстов
-								<span class="member-item__date">27 ноября</span>
-							</div>
-							<div class="member-item__info">
-								Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Вдали от всех живут они в буквенных домах на берегу Семантика большого языкового океана.
-							</div>
-						</div>
-					</div>
-					<div class="paging">
-						<a href="#">Пред</a>
-						<a href="#">1</a>
-						<span class="active">2</span>
-						<a href="#">3</a>
-						<span class="etc">...</span>
-						<a href="#">15</a>
-						<a href="#">След</a>
-					</div>
+					<div class="no-winners">Объявление первых 30 победителей ー 23 февраля!</div>
+					<!--					<div class="members-list">-->
+					<!--						<div class="member-item">-->
+					<!--							<div class="member-item__name">-->
+					<!--								Андрей Волосюк-->
+					<!--								<span class="member-item__date">27 ноября</span>-->
+					<!--							</div>-->
+					<!--							<div class="member-item__info">-->
+					<!--								Маленький ручеек Даль журчит по всей стране и обеспечивает ее всеми необходимыми правилами. Эта парадигматическая страна, в которой жаренные члены предложения залетают прямо в рот.-->
+					<!--							</div>-->
+					<!--						</div>-->
+					<!--						<div class="member-item">-->
+					<!--							<div class="member-item__name">-->
+					<!--								Алексей Синкевич-->
+					<!--								<span class="member-item__date">27 ноября</span>-->
+					<!--							</div>-->
+					<!--							<div class="member-item__info">-->
+					<!--								Однажды одна маленькая строчка рыбного текста по имени Lorem ipsum решила выйти в большой мир грамматики. Великий Оксмокс предупреждал ее о злых запятых, диких знаках вопроса и коварных точках с запятой, но текст не дал сбить себя с толку.-->
+					<!--							</div>-->
+					<!--						</div>-->
+					<!--						<div class="member-item">-->
+					<!--							<div class="member-item__name">-->
+					<!--								Игорь Селиверстов-->
+					<!--								<span class="member-item__date">27 ноября</span>-->
+					<!--							</div>-->
+					<!--							<div class="member-item__info">-->
+					<!--								Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Вдали от всех живут они в буквенных домах на берегу Семантика большого языкового океана.-->
+					<!--							</div>-->
+					<!--						</div>-->
+					<!--					</div>-->
+					<!--					<div class="paging">-->
+					<!--						<a href="#">Пред</a>-->
+					<!--						<a href="#">1</a>-->
+					<!--						<span class="active">2</span>-->
+					<!--						<a href="#">3</a>-->
+					<!--						<span class="etc">...</span>-->
+					<!--						<a href="#">15</a>-->
+					<!--						<a href="#">След</a>-->
+					<!--					</div>-->
 				</div>
 			</div>
 		</div>
@@ -442,6 +521,14 @@ AppAsset::register($this);
 </div>
 <!-- END POPUP-->
 
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-71496303-2', 'auto');
+	ga('send', 'pageview');
+</script>
 
 <?php $this->endBody() ?>
 </body>

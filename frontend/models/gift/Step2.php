@@ -23,9 +23,11 @@ class Step2 extends Model  {
 	public function rules()
 	{
 		return [
-			[['validation_code', 'id'], 'required'],
+			['id', 'required'],
 			['id', 'integer'],
-			['validation_code', 'string', 'length' => 6],
+			['validation_code', 'string'],
+			['validation_code', 'required', 'message' => 'Введите код подтверждения'],
+
 		];
 	}
 
@@ -41,8 +43,11 @@ class Step2 extends Model  {
 				$gift->save();
 
 				return true;
+			} else {
+				$gift->addError('validation_code', 'Код подтверждения неверен');
+				return $gift->getErrors();
 			}
-		}
-		return false;
+		} else
+			return $this->getErrors();
 	}
 }

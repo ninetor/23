@@ -20,8 +20,10 @@ class AppAsset extends AssetBundle
     public $css = [
 	    'js/vendors/fancybox/jquery.fancybox.css',
         'css/style.css',
+        'css/my.css',
     ];
     public $js = [
+	    'js/antimat.js',
 	    'js/interface.js',
 	    'js/vendors/fancybox/jquery.fancybox.pack.js',
 	    'js/vendors/mask/jquery.mask.min.js',

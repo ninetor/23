@@ -44,7 +44,7 @@ class GiftController extends BaseController {
 			$step2 = new Step2();
 			if($step2->load(Yii::$app->request->post())) {
 				if ($res = $step2->checkIdentity())
-					return true;
+					return $res;
 			}
 		}
 		return false;
@@ -59,8 +59,8 @@ class GiftController extends BaseController {
 
 			$step3 = new Step3();
 			if($step3->load(Yii::$app->request->post())) {
-				if ($step3->addPhoneTo())
-					return true;
+				$res = $step3->addPhoneTo();
+				return $res;
 			}
 		}
 		return false;

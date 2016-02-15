@@ -1,7 +1,3 @@
-<?php
-$this->title = 'My Yii Application';
-?>
-
 <div class="container">
 	<div class="wot-info">
 		<div class="wot-info__left">
@@ -22,7 +18,7 @@ $this->title = 'My Yii Application';
 				</div>
 				<div class="wot-select-mobile-item__txt">
 					<strong>50 танков</strong> Т-34-85М<br>
-					<strong>+5 дней премиум-аккаунта</strong> для игры World of Tanks<br>
+					<strong>+7 дней премиум-аккаунта</strong> для игры World of Tanks<br>
 				</div>
 			</div>
 		</div>
@@ -43,6 +39,7 @@ $this->title = 'My Yii Application';
 			</div>
 			<span class="select-btn select-btn--tank">Выиграть танк</span>
 		</a>
+		<div class="delimiter">или</div>
 		<a href="#prize-step1" class="wot-select__item popup">
 			<div class="wot-select__item-img wot-select__item-img--prize">
 				<div class="wot-select__item-img-wrap">
@@ -52,7 +49,7 @@ $this->title = 'My Yii Application';
 							<span class="advert">Участвуйте в конкурсе</span>
 							<span>Призы</span>
 							<span>50 танков Т-34-85-М</span>
-							<span>+ 5 дней премиум-аккаунта для<br> игры World of Tanks</span>
+							<span>+ 7 дней премиум-аккаунта для<br> игры World of Tanks</span>
 						</div>
 					</div>
 				</div>

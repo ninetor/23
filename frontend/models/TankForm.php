@@ -22,13 +22,14 @@ class TankForm extends Model {
 	public function rules()
 	{
 		return [
-			[['activity', 'name', 'text', 'phone'], 'required'],
+			[['activity', 'text'], 'required', 'message' => 'Ошибка! Данное поле должно быть заполнено'],
 
+			['name', 'required', 'message' => 'Напишите, как вас зовут'],
 			['activity', 'integer'],
 
 			[['text', 'name'], 'string'],
 
-			['phone', 'string', 'length' => 12]
+			['phone', 'string']
 		];
 	}
 
@@ -43,6 +44,6 @@ class TankForm extends Model {
 			if ($participant->save())
 				return true;
 		}
-		return false;
+		return $this->getErrors();
 	}
 }

@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="container__inner">
-		<h1 class="centered">Правила акции и творческого конкурса «Боевые подарки»</h1>
+		<h1 class="centered">Правила акции «Боевые подарки» и творческого конкурса «Дарите то, что нравится»</h1>
 		<h2 class="centered">Как стать участником акции?</h2>
 		<p class="centered">
 			Чтобы стать участником акции, воспользуйтесь специальным предложением: обменяйте ваши баллы «МТС Бонус» на боевые подарки — игровое золото, премиум-аккаунт или инвайт-код World of Tanks.
@@ -22,7 +22,7 @@
 					<div class="page-table__cell">100 игрового золота</div>
 					<div class="page-table__cell centered"><span class="points">350</span></div>
 				</div>
-
+				​
 				<div class="page-table__row">
 					<div class="page-table__cell">Бонус код «World of Tanks 250 gold»</div>
 					<div class="page-table__cell">250 игрового золота</div>
@@ -60,7 +60,7 @@
 						На сайте <a href="http://tanki.mts.by" target="_blank">tanki.mts.by</a> выбрать один из предлагаемых к обмену за бонусные баллы подарков.
 					</li>
 					<li>
-						Ввести номер телефона МТС, абонента-отправителя, с виртуального счёта которого будут списаны бонусные баллы. Абонент-отправитель должен быть участником программы «МТС Бонус» (ссылка на раздел на сайте).
+						Ввести номер телефона МТС, абонента-отправителя, с виртуального счёта которого будут списаны бонусные баллы. Абонент-отправитель должен быть участником программы <a href="http://tanki.mts.by/bonus">«МТС Бонус»</a>.
 					</li>
 					<li>
 						На указанный номер придёт SMS с кодом для подтверждения операции. Данный код нужно ввести в специальной форме на сайте tanki.mts.by.
@@ -78,28 +78,28 @@
 		<div class="question-item">
 			<div class="question-link">Сколько бонусных кодов я могу заказывать?</div>
 			<div class="question-answer">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ratione consequuntur animi minima placeat, velit tempora sit eveniet accusantium magnam corporis ab, amet! Quam, sint, sit. Vitae autem, asperiores dolore!
+				Вы можете заказать неограниченное число бонусных кодов — в рамках того количество баллов «МТС Бонус», которые есть на вашем виртуальном счету.
 			</div>
 			<i></i>
 		</div>
 		<div class="question-item">
 			<div class="question-link">Могу ли я отправить бонусный код абоненту другого мобильного оператора?</div>
 			<div class="question-answer">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, eum, omnis! Minus vitae qui debitis architecto fugit? Delectus quasi nesciunt modi architecto, quae? Sint soluta iusto tempora, doloribus incidunt voluptatum?
+				Да, вы можете оплатить бонусный код своими баллами «МТС Бонус», а затем ввести номер абонента другого мобильного оператора — ему будет отправлено поздравительное SMS-сообщение с бонусным кодом с указанием вашего номера в качестве отправителя.
 			</div>
 			<i></i>
 		</div>
 		<div class="question-item">
 			<div class="question-link">Если я не зарегистрирован в «МТС Бонус», могу ли я принять участие в акции?</div>
 			<div class="question-answer">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, eum, omnis! Minus vitae qui debitis architecto fugit? Delectus quasi nesciunt modi architecto, quae? Sint soluta iusto tempora, doloribus incidunt voluptatum?
+				Нет, но вы можете <a href="/bonus#howto">зарегистрироваться в программе</a>, чтобы стать участником новых акций.<br>Сейчас вы можете принять участие в творческом конкурсе и получить шанс выиграть танк Т-34-85 и 7 дней премиум аккаунта в игре World of Tanks.
 			</div>
 			<i></i>
 		</div>
 		<div class="question-item">
 			<div class="question-link">Могу ли я быстро пополнить баланс, чтобы увеличить своё количество бонусных баллов?</div>
 			<div class="question-answer">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, eum, omnis! Minus vitae qui debitis architecto fugit? Delectus quasi nesciunt modi architecto, quae? Sint soluta iusto tempora, doloribus incidunt voluptatum?
+				Обращаем ваше внимание, что бонусные баллы начисляются участникам программы «МТС Бонус» за <a href="http://bonus.mts.by/questions/" target="_blank">пользование услугами связи МТС</a>. За каждую израсходованную 1 000 рублей (с учетом НДС) вам будет начисляться 1 бонусный балл. Таким образом, если вы только пополнили счёт, то количество бонусных баллов не будет увеличено.
 			</div>
 			<i></i>
 		</div>
@@ -107,7 +107,7 @@
 	<h2 class="centered">Как стать участником творческого конкурса?</h2>
 	<div class="question-list">
 		<div class="question-item">
-			<div class="question-link">Для участия в творческом конкурсе «Подарите мне танк, а не банальный подарок, необходимо:</div>
+			<div class="question-link">Для участия в творческом конкурсе «Дарите то, что нравится», необходимо:</div>
 			<div class="question-answer">
 				<ul>
 					<li>
@@ -126,35 +126,36 @@
 		<div class="question-item">
 			<div class="question-link">Сколько раз можно принимать участие в творческом конкурсе?</div>
 			<div class="question-answer">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ratione consequuntur animi minima placeat, velit tempora sit eveniet accusantium magnam corporis ab, amet! Quam, sint, sit. Vitae autem, asperiores dolore!
+				Один участник творческого конкурса может оставлять неограниченное число оригинальных текстовых обоснований на любую из заданных тем.
 			</div>
 			<i></i>
 		</div>
 		<div class="question-item">
 			<div class="question-link">Сколько будет победителей творческого конкурса?</div>
 			<div class="question-answer">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ratione consequuntur animi minima placeat, velit tempora sit eveniet accusantium magnam corporis ab, amet! Quam, sint, sit. Vitae autem, asperiores dolore!
+				Из числа всех участников творческого конкурса будут выбраны 50 победителей.
 			</div>
 			<i></i>
 		</div>
 		<div class="question-item">
 			<div class="question-link">Какие призы получат победители?</div>
 			<div class="question-answer">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, eum, omnis! Minus vitae qui debitis architecto fugit? Delectus quasi nesciunt modi architecto, quae? Sint soluta iusto tempora, doloribus incidunt voluptatum?
+				50 победителей творческого конкурса получат бонус-код на танк Т-34-85 и 5 дней премиум аккаунта в игре World of Tanks.
 			</div>
 			<i></i>
 		</div>
 		<div class="question-item">
 			<div class="question-link">Как будут определены победители?</div>
 			<div class="question-answer">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, eum, omnis! Minus vitae qui debitis architecto fugit? Delectus quasi nesciunt modi architecto, quae? Sint soluta iusto tempora, doloribus incidunt voluptatum?
+				Победителей определит жюри, состоящее из представителей компании МТС. <br>Критерии оценки: оригинальность текстового обоснования, почему танк лучше, чем банальный подарок, соответствие тематике творческого конкурса, грамотность.
 			</div>
 			<i></i>
 		</div>
 		<div class="question-item">
 			<div class="question-link">Когда и где будут объявлены победители творческого конкурса?</div>
 			<div class="question-answer">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, eum, omnis! Minus vitae qui debitis architecto fugit? Delectus quasi nesciunt modi architecto, quae? Sint soluta iusto tempora, doloribus incidunt voluptatum?
+				<p>Определение победителей будет проходить в три этапа: 30 победителей будут названы 23 февраля 2016 года, 10 победителей — 1 марта 2016 года, 10 победителей — 15 марта 2016 года. </p>
+				<p>Результаты творческого конкурса будут опубликованы на сайте tanki.mts.by не позднее 20 марта 2016 года. Также с победителями свяжутся представители компании МТС по телефонам, оставленным участниками в заявках. </p>
 			</div>
 			<i></i>
 		</div>

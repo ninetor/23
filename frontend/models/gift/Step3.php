@@ -17,7 +17,8 @@ class Step3 extends Model {
 	public function rules()
 	{
 		return [
-			[['to', 'id'], 'required'],
+			['id', 'required'],
+			['to', 'required', 'message' => 'Введите номер телефона'],
 			['id', 'integer'],
 			['to', 'string', 'length' => 12],
 		];
@@ -35,8 +36,11 @@ class Step3 extends Model {
 			if($gift->success && $gift->send_success) {
 				$gift->save();
 				return true;
+			} else {
+				$gift->addError('to', 'Ошибка отправления! Все подробности в SMS');
+				return $gift->getErrors();
 			}
-		}
-		return false;
+		} else
+			return $this->getErrors();
 	}
 }

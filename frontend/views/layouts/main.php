@@ -42,11 +42,11 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 
-<div class="bgblock1"></div>
-<div class="bgblock2"></div>
 
 <!--LAYOUT-->
 <div class="layout">
+	<div class="bgblock1"></div>
+	<div class="bgblock2"></div>
 	<!--HEADER-->
 	<header class="page-header">
 		<div class="container">
@@ -74,6 +74,9 @@ AppAsset::register($this);
 	<div class="page-content <?= $isHome ? 'page-content--index' : null; ?>">
 		<?= $content?>
 	</div>
+	<footer class="page-footer">
+		&copy; 2002—2016 СООО «Мобильные ТелеСистемы». 220043, г. Минск пр. Независимости, 95 Лицензия МСиИ РБ №926 от 30.04.2004, действительна до 30.04.2022 УНП 800013732
+	</footer>
 </div><!-- END LAYOUT-->
 
 
@@ -443,7 +446,17 @@ AppAsset::register($this);
 				</div>
 				<div id="tab2" class="tab_content">
 					<?php if(isset($this->params['winners']) && count($this->params['winners']) > 0) { ?>
-
+						<?php foreach($this->params['winners'] as $winner) { ?>
+							<div class="member-item">
+								<div class="member-item__name">
+									<?= $winner->name; ?>
+									<span class="member-item__date"><?= Date::DateMonth($winner->date); ?></span>
+								</div>
+								<div class="member-item__info">
+									<?= $winner->text ?>
+								</div>
+							</div>
+						<?php } ?>
 					<?php } else {?>
 						<div class="no-winners">Объявление первых 30 победителей ー 23 февраля!</div>
 					<?php } ?>
@@ -468,9 +481,6 @@ AppAsset::register($this);
 	</div>
 </div>
 <!-- END POPUP-->
-<div class="footer">
-	© 2002—2016 СООО «Мобильные ТелеСистемы». 220043, г. Минск пр. Независимости, 95 Лицензия МСиИ РБ №926 от 30.04.2004, действительна до 30.04.2022 УНП 800013732
-</div>
 <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

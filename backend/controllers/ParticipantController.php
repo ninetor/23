@@ -45,7 +45,7 @@ class ParticipantController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Participant::find(),
+            'query' => Participant::find()->orderBy(['id' => SORT_DESC]),
         ]);
 
         return $this->render('index', [

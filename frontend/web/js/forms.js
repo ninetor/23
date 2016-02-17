@@ -88,6 +88,15 @@ $(document).ready(function() {
 		data['Step3[id]'] = giftObject.id;
 		data['Step3[to]'] = proccessPhone(phoneNumber);
 
+		if (!data['Step3[to]']) {
+			$('#prize-step3').find('div.error-wrap')
+				.addClass('active').find('.error-msg')
+				.text('Введите номер телефона');
+
+			$('#prize-step3').find('#loadersoc').hide();
+			return false
+		}
+
 		$.post(
 			'/gift_step3',
 			data,
@@ -97,10 +106,16 @@ $(document).ready(function() {
 					$('#toStep4').click();
 					$('#prize-step3').find('input[name="Step3[to]"]').val('');
 				} else {
-					var msg = res.to[0];
+					if(res.to)
+						var msg = res.to[0];
+					else
+						var msg = 'Ошибка отправления. Повторите попытку позже'
+
 					$('#prize-step3').find('div.error-wrap')
 						.addClass('active').find('.error-msg')
 						.text(msg);
+
+					$('#prize-step3').find('.btn-wrap span').unbind('click');
 				}
 			}
 		);

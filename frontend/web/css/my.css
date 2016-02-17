@@ -80,3 +80,11 @@
 		min-width: inherit;
 	}
 }
+
+@media screen and (max-width: 600px){
+	.error-wrap.input-half{
+		width: 100%;
+		margin-right: 0;
+		float: none;
+	}
+}

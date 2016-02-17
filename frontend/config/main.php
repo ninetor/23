@@ -19,6 +19,9 @@ return [
 			    ],
 		    ],
 	    ],
+	    'date' => [
+		    'class' => 'frontend\components\Soap',
+	    ],
 	    'errorHandler' => [
 		    'errorAction' => 'site/error',
 	    ],

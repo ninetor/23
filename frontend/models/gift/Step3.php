@@ -37,7 +37,7 @@ class Step3 extends Model {
 				$gift->save();
 				return true;
 			} else {
-				$gift->addError('to', 'Ошибка отправления! Все подробности в SMS');
+				$gift->addError('to', 'Информация отправлена в SMS на ваш номер телефона');
 				return $gift->getErrors();
 			}
 		} else

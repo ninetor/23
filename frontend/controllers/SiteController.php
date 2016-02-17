@@ -114,18 +114,18 @@ class SiteController extends BaseController
 //			'Methodname' => 'MTS_CreateOrder',
 //			'MethodParams' => [
 //				'DictionaryItem' => [
-//					['Name' => 'ident', 'Value' => '375295704719'],
+//					['Name' => 'ident', 'Value' => '375111111111'],
 //					['Name' => 'product', 'Value' => '200'],
 //					['Name' => 'action', 'Value' => '1'],
 //					['Name' => 'sec_code', 'Value' => '1sEVeN_nInE1'],
 //					['Name' => 'source_id', 'Value' => '185'],
-//					['Name' => 'add_param', 'Value' => 'MSISDN=375293278146;GIFT_ID=1168'],
+//					['Name' => 'add_param', 'Value' => 'MSISDN=375293278146;GIFT_ID=1026'],
 //				],
 //			],
 //		]);
-
-
-
-		echo json_encode($result);die;
+//
+//
+//
+		var_dump($result); die;
 	}
 }

@@ -752,7 +752,7 @@ p {
     color: #dedccf; }
 
 .wot-select {
-  padding-bottom: 120px;
+  padding-bottom: 0px;
   background: url(../img/content/select-arrows.png) center bottom no-repeat;
   position: relative; }
   .wot-select:after {
@@ -783,7 +783,7 @@ p {
 
 .wot-select__item-img {
   line-height: 330px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   overflow: hidden; }
   .wot-select__item-img img {
     display: inline-block;
@@ -1869,7 +1869,7 @@ input[type="text"].prize-task {
   position: absolute;
   width: 100%;
   padding-top: 0;
-  top: 14%; }
+  top: 11%; }
   .page-content--index .wot-info {
     margin-bottom: 10px; }
 

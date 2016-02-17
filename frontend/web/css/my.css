@@ -6,3 +6,77 @@
 	text-align: center;
 	margin: 20px 0;
 }
+
+::-webkit-input-placeholder {color:#797979 ;font-family: 'WarHeliosCondCBold';}
+::-moz-placeholder          {color:#797979 ;font-family: 'WarHeliosCondCBold';}/* Firefox 19+ */
+:-moz-placeholder           {color:#797979 ;font-family: 'WarHeliosCondCBold';}/* Firefox 18- */
+:-ms-input-placeholder      {color:#797979 ;font-family: 'WarHeliosCondCBold';}
+
+.phone-code:before {
+	content: "+375";
+	color:#797979 !important;
+}
+
+/*#prize-step1, #prize-step2,*/
+/*#prize-step3, #prize-step4 {*/
+	/*position: relative;*/
+/*}*/
+#loadersoc6upredUP, .preloader-wrap {
+	background: rgba(255,255,255,.5);
+}
+
+.listing-page li {
+	margin-right: 17px;
+	list-style: none;
+	display: inline-block;
+}
+.listing-page li.active {
+	background: #eb3200 none repeat scroll 0 0;
+	border-radius: 50%;
+	height: 40px;
+	line-height: 40px;
+	width: 40px;
+}
+.listing-page li a, .listing-page li span {
+	margin: 0;
+}
+.listing-page li.active a {
+	cursor: default;
+	color: #fff;
+	text-decoration: none;
+	border: none;
+}
+.listing-page li.active a:hover {
+	text-decoration: none;
+}
+.steps-wrap--member {
+	padding: 40px 50px 30px;
+	max-width: 1100px;
+	min-width: 500px;
+}
+.steps-wrap--member .member-item {
+	border-bottom: 1px dashed #a29f89;
+	margin-bottom: 0;
+}
+
+.member-list {
+	min-width: 800px;
+}
+.footer {
+	position: absolute;
+	bottom: 10px;
+	color: #A29F89 ;
+	font: 13px "WarHeliosCondC";
+	width: 100%;
+	text-align: center;
+}
+@media screen and (max-width: 800px) {
+	.member-list {
+		min-width: inherit;
+	}
+}
+@media screen and (max-width: 500px){
+	.steps-wrap--member{
+		min-width: inherit;
+	}
+}

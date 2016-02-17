@@ -140,7 +140,7 @@
 		<div class="question-item">
 			<div class="question-link">Какие призы получат победители?</div>
 			<div class="question-answer">
-				50 победителей творческого конкурса получат бонус-код на танк Т-34-85 и 5 дней премиум аккаунта в игре World of Tanks.
+				50 победителей творческого конкурса получат бонус-код на танк Т-34-85 и 7 дней премиум аккаунта в игре World of Tanks.
 			</div>
 			<i></i>
 		</div>
@@ -161,6 +161,6 @@
 		</div>
 	</div>
 	<div class="link-centered">
-		<a href="img/content/logomts.png" class="download" target="_blank" download>Скачать полные правила</a>
+		<a href="/uploads/rules.pdf" class="download" target="_blank" download>Скачать полные правила</a>
 	</div>
 </div>

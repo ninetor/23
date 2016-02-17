@@ -14,5 +14,6 @@ return [
 
 //Tank controller
 	'changeactivity' => 'tank/changeactivity',
-	'addparticipant' => 'tank/addparticipant'
+	'addparticipant' => 'tank/addparticipant',
+	'getpostdata' => 'tank/getpostdata',
 ];

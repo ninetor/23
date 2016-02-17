@@ -1,7 +1,31 @@
 $(document).ready(function() {
+	Tank = {};
+	var hash = location.hash;
+	if (hash == '#prize-step1')
+		$('.select-btn--prize').click();
+	else if(hash.match(/\#post\-\d+/)) {
+		var dataArray = hash.split('-');
+		var postId = parseInt(dataArray.slice(-1).pop());
+
+		$.post(
+			'/getpostdata',
+			{id : postId},
+			function (res) {
+				if(res) {
+					$('.member-item__n').text(res.name);
+					$('.member-item__date').text(res.date);
+					$('.member-item__info').text(res.text);
+
+					$('.member_click').click();
+				}
+			}
+		)
+	}
+
 	var giftObject = {};
 
 	$('#prize-step1').find('.btn-wrap span').on('click', function () {
+		$('#prize-step1').find('#loadersoc').show();
 		var data = {};
 		var phoneNumber = $('#prize-step1').find('input[name="Step1[from]"]').val();
 		console.log(phoneNumber);
@@ -16,9 +40,11 @@ $(document).ready(function() {
 			'/gift_step1',
 			data,
 			function (res) {
+				$('#prize-step1').find('#loadersoc').hide();
 				if(parseInt(res)) {
 					giftObject.id = parseInt(res);
 					$('#toStep2').click();
+					$('#prize-step1').find('input[name="Step1[from]"]').val('');
 				} else {
 					var msg = res.from[0];
 					$('#prize-step1').find('div.error-wrap')
@@ -29,7 +55,9 @@ $(document).ready(function() {
 		);
 	});
 	$('#prize-step2').find('.btn-wrap span').on('click', function () {
+		$('#prize-step2').find('#loadersoc').show();
 		var data = {};
+
 
 		data['Step2[id]'] = giftObject.id;
 		data['Step2[validation_code]'] = $('#prize-step2').find('input[name="Step2[validation_code]"]').val();
@@ -38,9 +66,10 @@ $(document).ready(function() {
 			'/gift_step2',
 			data,
 			function (res) {
+				$('#prize-step2').find('#loadersoc').hide();
 				if(res == true) {
 					$('#toStep3').click();
-
+                    $('#prize-step2').find('input[name="Step2[validation_code]"]').val('');
 				} else {
 					var msg = res.validation_code[0];
 					$('#prize-step2').find('div.error-wrap')
@@ -52,6 +81,7 @@ $(document).ready(function() {
 		);
 	});
 	$('#prize-step3').find('.btn-wrap span').on('click', function () {
+		$('#prize-step3').find('#loadersoc').show();
 		var data = {};
 		var phoneNumber = $('#prize-step3').find('input[name="Step3[to]"]').val();
 
@@ -62,8 +92,10 @@ $(document).ready(function() {
 			'/gift_step3',
 			data,
 			function (res) {
+				$('#prize-step3').find('#loadersoc').hide();
 				if(res == true) {
 					$('#toStep4').click();
+					$('#prize-step3').find('input[name="Step3[to]"]').val('');
 				} else {
 					var msg = res.to[0];
 					$('#prize-step3').find('div.error-wrap')
@@ -118,12 +150,42 @@ $(document).ready(function() {
 			return false;
 		}
 
-		$.post(
+
+		addParticipant(data, function (res)  {
+			if (parseInt(res)) {
+				Tank.user_id = res;
+				$('#tank_toStep3').click();
+
+				$('#tank-step2').find('input[name="TankForm[phone]"]').val('');
+				$('#tank-step2').find('input[name="TankForm[name]"]').val('');
+				$('#tank-step2').find('textarea[name="TankForm[text]"]').val('');
+
+				$("html, body").animate({ scrollTop: 0 }, "slow");
+			} else {
+				for(var result in res) {
+					$('#tank-step2')
+						.find('input[name="TankForm['+result+']"], textarea[name="TankForm['+res[result]+']"]')
+						.addClass('active');
+					$('#tank-step2')
+						.find('div.error-'+result)
+						.text(res[result][0]);
+				}
+			}
+		});
+		/*$.post(
 			'/addparticipant',
 			data,
 			function (res) {
-				if (res == true) {
+				callback(res)
+				if (parseInt(res)) {
+
 					$('#tank_toStep3').click();
+					Tank = {user_id : res}
+
+					$('#tank-step2').find('input[name="TankForm[phone]"]').val('');
+					$('#tank-step2').find('input[name="TankForm[name]"]').val('');
+					$('#tank-step2').find('textarea[name="TankForm[text]"]').val('');
+
 					$("html, body").animate({ scrollTop: 0 }, "slow");
 				} else {
 					for(var result in res) {
@@ -136,7 +198,7 @@ $(document).ready(function() {
 					}
 				}
 			}
-		);
+		);*/
 	});
 	$('#tank-step3').find('.social-btn').on('click', function () {
 		var share_btn = $(this).attr('data-share');
@@ -146,7 +208,16 @@ $(document).ready(function() {
 
 	$('#prize-step1').find('input[type="radio"]').eq(0).attr('checked', true);
 
+	$('input[type="tel"]').on('focus', function () {
+		$('.error-phone').text('');
+	});
+	$('input, textarea').on('focus', function () {
+		$(this).parent().find('.error-msg').text('');
+	});
+
 	Share = {
+		app_id: 799191360227615,
+		url_tank: location.protocol+'//'+location.hostname,
 		url: location.protocol+'//'+location.hostname,
 		title_main: 'Обменивайте баллы «МТС Бонус» на золото, дни премиум-аккаунта или инвайт-код для WoT!',
 		title_tank: 'Хочу вместо банальных подарков танк для World of Tanks!',
@@ -157,16 +228,18 @@ $(document).ready(function() {
 
 		vk_main: function() {
 			url  = 'http://vkontakte.ru/share.php?';
-			url += 'url='          + encodeURIComponent(this.url);
+			url += 'url='          + encodeURIComponent(this.url_tank);
 			url += '&title='          + encodeURIComponent(this.name_fb);
 			url += '&description='       + encodeURIComponent(this.title_main);
 			url += '&image='       + this.url+'/img/share/1_5.jpg';
-			url += '&noparse=true';
+			url += '&noparse=true&clear=123';
 			Share.popup(url);
 		},
 		vk_tank: function() {
+			var newUrl = this.url_tank + '/#post-' + Tank.user_id;
+
 			url  = 'http://vkontakte.ru/share.php?';
-			url += 'url='          + encodeURIComponent(this.url);
+			url += 'url='          + encodeURIComponent(newUrl);
 			url += '&title='          + encodeURIComponent(this.name_fb);
 			url += '&description='       + encodeURIComponent(this.title_tank);
 			url += '&image='       + this.url+'/img/share/2_5.jpg';
@@ -184,20 +257,22 @@ $(document).ready(function() {
 		},
 		fb_main: function() {
 			url  = 'https://www.facebook.com/dialog/feed?';
-			url += 'app_id='     + 799191360227615;
+			url += 'app_id='     + this.app_id;
 			url += '&description='     + encodeURIComponent(this.title_main);
 			url += '&link='       + encodeURIComponent(this.url);
 			url += '&name='       + encodeURIComponent(this.name_fb);
 			url +=  '&redirect_uri=http://facebook.com/';
-			url +=  '&display=popup';
+			url +=  '&display=popup&clear=123';
 			url += '&picture=' + this.url+'/img/share/1_1.jpg';
 			Share.popup(url);
 		},
 		fb_tank: function() {
+			var newUrl = this.url_tank + '/#post-' + Tank.user_id;
+
 			url  = 'https://www.facebook.com/dialog/feed?';
-			url += 'app_id='     + 799191360227615;
+			url += 'app_id='     + this.app_id;
 			url += '&description='     + encodeURIComponent(this.title_tank);
-			url += '&link='       + encodeURIComponent(this.url);
+			url += '&link='       + encodeURIComponent(newUrl);
 			url += '&name='       + encodeURIComponent(this.name_fb);
 			url +=  '&redirect_uri=http://facebook.com/';
 			url +=  '&display=popup';
@@ -206,7 +281,7 @@ $(document).ready(function() {
 		},
 		fb_prize: function() {
 			url  = 'https://www.facebook.com/dialog/feed?';
-			url += 'app_id='     + 799191360227615;
+			url += 'app_id='     + this.app_id;
 			url += '&description='     + encodeURIComponent(this.title_prize);
 			url += '&link='       + encodeURIComponent(this.url);
 			url += '&name='       + encodeURIComponent(this.name_prize);
@@ -227,6 +302,11 @@ $(document).ready(function() {
 		}
 	};
 
+
+	$('.fancy-close').on('click', function () {
+		$('.error-msg').text('');
+	});
+
 	$('.socials a').on('click', function () {
 		var share_btn = $(this).attr('data-share');
 
@@ -237,6 +317,17 @@ $(document).ready(function() {
 function proccessPhone(phone) {
 	var phoneNum = phone.replaceArray(['(', ')', ' ', '-', '-'], ['', '', '', '', '']);
 	return phoneNum ? '375' + phoneNum : null;
+}
+
+function addParticipant(data, callback) {
+	$.post(
+		'/addparticipant',
+		data,
+		function (res) {
+			callback(res);
+
+		}
+	);
 }
 
 String.prototype.replaceArray = function(find, replace) {

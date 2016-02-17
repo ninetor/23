@@ -3,13 +3,12 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use frontend\components\Date;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
 use yii\helpers\Url;
-use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
-use common\widgets\Alert;
+use yii\widgets\LinkPager;
+use yii\widgets\Pjax;
 
 if (isset($this->params['activity']))
 	$activity = $this->params['activity'];
@@ -28,7 +27,8 @@ AppAsset::register($this);
 <html lang="<?= Yii::$app->language ?>" >
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
-	<meta property="og:title" content="Хочу прокатиться на #4GтаксиМТС! " />
+	<meta property="og:title" content="#БоевыеПодарки МТС" />
+	<meta property="og:description" content="Обменивайте баллы «МТС Бонус» на золото, дни премиум-аккаунта или инвайт-код для WoT!" />
 	<meta property="og:image" content="http://tanki.mts.by/img/share/1_1.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
@@ -66,7 +66,7 @@ AppAsset::register($this);
 			<nav class="top-nav">
 				<a href="#tank-step1" class="top-nav__item popup">Выиграть танк</a>
 				<a href="#prize-step1" class="top-nav__item popup">Сделать подарок</a>
-				<?= Html::a('МТС бонус', Url::to(['site/bonus']), ['class' => 'top-nav__item']); ?>
+				<?= Html::a('МТС Бонус', Url::to(['site/bonus']), ['class' => 'top-nav__item']); ?>
 				<?= Html::a('Правила', Url::to(['site/rules']), ['class' => 'top-nav__item']); ?>
 			</nav>
 		</div>
@@ -82,13 +82,13 @@ AppAsset::register($this);
 	<ul class="menu-right__list">
 		<li class="menu-right__item"><a href="#tank-step1" class="popup">Выиграть танк</a></li>
 		<li class="menu-right__item"><a href="#prize-step1" class="popup">Сделать подарок</a></li>
-		<li class="menu-right__item"><a href="<?= Url::to(['site/bonus']);?>">МТС бонус</a></li>
+		<li class="menu-right__item"><a href="<?= Url::to(['site/bonus']);?>">МТС Бонус</a></li>
 		<li class="menu-right__item"><a href="<?= Url::to(['site/rules']);?>">Правила</a></li>
 	</ul>
 	<div class="socials">
 		<a href="#" data-share="vk_main"  class="socials__item vk"><span></span></a>
-		<a href="#"data-share="fb_main"  class="socials__item facebook"><span></span></a>
-		<a href="#"data-share="tw_main"  class="socials__item twitter"><span></span></a>
+		<a href="#" data-share="fb_main"  class="socials__item facebook"><span></span></a>
+		<a href="#" data-share="tw_main"  class="socials__item twitter"><span></span></a>
 	</div>
 </div><!--END MOBILE-MENU-->
 
@@ -102,7 +102,7 @@ AppAsset::register($this);
 				<div class="popup-content__info">
 					Для себя или в подарок &#8212; участвуйте в творческом конкурсе и выиграйте:
 					<strong>1 из 50 танков Т-34-85М + 7 дней премиум-аккаунта</strong>
-					<span class="clarification">Зовите участвовать друзей: чем больше завок, тем больше шансов!</span>
+					<span class="clarification">Зовите участвовать друзей: чем больше заявок, тем больше шансов!</span>
 				</div>
 				<div class="tank-steps-list">
 					<ul>
@@ -205,7 +205,7 @@ AppAsset::register($this);
 						обменяйте баллы  &#171;МТС Бонус&#187; на золото, премиум аккаунт<br>
 						или инвайт-код World of Tanks
 						<strong>Сделайте подарок себе или другу!</strong>
-						<a href="#prize-step1" class="popup">Подробнее</a>
+						<a href="<?= Url::to(['/', '#' => 'prize-step1'])?>" target="_blank">Подробнее</a>
 					</div>
 				</div>
 			</div>
@@ -214,6 +214,7 @@ AppAsset::register($this);
 
 	<form action="#" method="post">
 		<div id="prize-step1">
+			<a href="#" class="fancy-close"></a>
 			<div class="preloader-wrap" id="loadersoc">
 				<div class="preloader">
 					<div class="circ1"></div>
@@ -222,7 +223,6 @@ AppAsset::register($this);
 					<div class="circ4"></div>
 				</div>
 			</div>
-			<a href="#" class="fancy-close"></a>
 			<div class="steps-wrap">
 				<div class="popup-content__title">Сделать подарок</div>
 				<div class="popup-content__info">
@@ -268,10 +268,10 @@ AppAsset::register($this);
 								<div class="phone-code">
 									<input class="user_phone" type="tel" name="Step1[from]">
 								</div>
-							<div class="error-msg"></div>
+								<div class="error-msg error-phone"></div>
+							</div>
 						</div>
-						</div>
-						<a href="<?= Url::to(['site/bonus', '#' => 'get_to_know_points']);?>">Как узнать сколько у меня баллов &#171;МТС Бонус&#187; ?</a>
+						<a href="<?= Url::to(['site/bonus', '#' => 'get_to_know_points']);?>" target="_blank">Как узнать сколько у меня баллов &#171;МТС Бонус&#187; ?</a>
 					</div>
 				</div>
 				<div class="btn-wrap">
@@ -282,6 +282,14 @@ AppAsset::register($this);
 		</div>
 		<div id="prize-step2">
 			<a href="#" class="fancy-close"></a>
+			<div class="preloader-wrap" id="loadersoc">
+				<div class="preloader">
+					<div class="circ1"></div>
+					<div class="circ2"></div>
+					<div class="circ3"></div>
+					<div class="circ4"></div>
+				</div>
+			</div>
 			<div class="steps-wrap">
 				<div class="popup-content__title">Сделать подарок</div>
 				<div class="popup-content__info">
@@ -315,6 +323,14 @@ AppAsset::register($this);
 		</div>
 		<div id="prize-step3">
 			<a href="#" class="fancy-close"></a>
+			<div class="preloader-wrap" id="loadersoc">
+				<div class="preloader">
+					<div class="circ1"></div>
+					<div class="circ2"></div>
+					<div class="circ3"></div>
+					<div class="circ4"></div>
+				</div>
+			</div>
 			<div class="steps-wrap">
 				<div class="popup-content__title">Сделать подарок</div>
 				<div class="popup-content__info">
@@ -338,7 +354,7 @@ AppAsset::register($this);
 								<div class="phone-code">
 									<input class="user_phone" type="tel" name="Step3[to]">
 								</div>
-							<div class="error-msg"></div>
+							<div class="error-msg error-phone"></div>
 						</div>
 					</div>
 					<div class="btn-wrap">
@@ -390,137 +406,71 @@ AppAsset::register($this);
 			</ul>
 			<div class="tab_container">
 				<div id="tab1" class="tab_content">
+					<?php  Pjax::begin([
+						'linkSelector' => '.listing-page li a',
+						'enablePushState' => false,
+					]);
+					?>
 					<div class="member-list">
-						<div class="member-item">
-							<div class="member-item__name">
-								Валерий Мыцик
-								<span class="member-item__date">15 февраля</span>
+						<?php foreach ($this->params['participants'] as $participant) { ?>
+							<div class="member-item">
+								<div class="member-item__name">
+									<?= $participant->name; ?>
+									<span class="member-item__date"><?= Date::DateMonth($participant->date); ?></span>
+								</div>
+								<div class="member-item__info">
+									<?= $participant->text ?>
+								</div>
 							</div>
-							<div class="member-item__info">
-								Надоели эти кружки! Их у меня сто, а такого танка ни одного! Подарите в честь праздника танк!
-							</div>
-						</div>
-						<div class="member-item">
-							<div class="member-item__name">
-								Сергей Бубнов
-								<span class="member-item__date">15 февраля</span>
-							</div>
-							<div class="member-item__info">
-								Подарите мне танк или пусть вам самим на 23 февраля все дарят только бритвы!
-							</div>
-						</div>
-						<div class="member-item">
-							<div class="member-item__name">
-								Александр Живушко
-								<span class="member-item__date">15 февраля</span>
-							</div>
-							<div class="member-item__info">
-								Подарите мне танк, а не гель для душа, потому что я настоящий мужик!
-							</div>
-						</div>
-						<div class="member-item">
-							<div class="member-item__name">
-								Петр Герасименко
-								<span class="member-item__date">15 февраля</span>
-							</div>
-							<div class="member-item__info">
-								Носки, конечно, вещь нужная, но танк помасштабнее будет! Выбираю танк!
-							</div>
-						</div>
-						<div class="member-item">
-							<div class="member-item__name">
-								Виталий Баранов
-								<span class="member-item__date">15 февраля</span>
-							</div>
-							<div class="member-item__info">
-								Дезодорант – это пшик! А танк – это танк. Подарите мне танк!
-							</div>
-						</div>
-						<div class="member-item">
-							<div class="member-item__name">
-								Алексей Рыбаков
-								<span class="member-item__date">15 февраля</span>
-							</div>
-							<div class="member-item__info">
-								Не хочу свитер, хочу танк! Очень!
-							</div>
-						</div>
-						<div class="member-item">
-							<div class="member-item__name">
-								Василий Гринчук
-								<span class="member-item__date">15 февраля</span>
-							</div>
-							<div class="member-item__info">
-								Разве можно сравнить ТАНК и БЛОКНОТ? ТАНК и БЛОКНОТ, КАРЛ! Подарите мне танк!
-							</div>
-						</div>
-						<div class="member-item">
-							<div class="member-item__name">
-								Александр Потапов
-								<span class="member-item__date">15 февраля</span>
-							</div>
-							<div class="member-item__info">
-								Дедушка Мороз, на Новый год ты мне подарил гель для душа!!!! Пожалуйста, исправься, и на 23 февраля подари мне танк!!!
-							</div>
-						</div>
+						<?php } ?>
 					</div>
-					<!--<div class="paging">
-							<a href="#">Пред</a>
-							<a href="#">1</a>
-							<span class="active">2</span>
-							<a href="#">3</a>
-							<span class="etc">...</span>
-							<a href="#">15</a>
-							<a href="#">След</a>
-						</div>-->
+					<div class="paging">
+						<?=
+						LinkPager::widget([
+							'pagination' => $this->params['participants_pages'],
+							'options' => ['class' => 'listing-page'],
+							'registerLinkTags' => true,
+							'nextPageLabel' => 'След',
+							'prevPageLabel' => 'Пред',
+							'nextPageCssClass' => 'listing-arrow',
+							'prevPageCssClass' => 'listing-arrow',
+							'hideOnSinglePage' => true,
+							'maxButtonCount' => 5,
+						]);
+						?>
+					</div>
+					<?php Pjax::end(); ?>
 				</div>
 				<div id="tab2" class="tab_content">
-					<div class="no-winners">Объявление первых 30 победителей ー 23 февраля!</div>
-					<!--					<div class="members-list">-->
-					<!--						<div class="member-item">-->
-					<!--							<div class="member-item__name">-->
-					<!--								Андрей Волосюк-->
-					<!--								<span class="member-item__date">27 ноября</span>-->
-					<!--							</div>-->
-					<!--							<div class="member-item__info">-->
-					<!--								Маленький ручеек Даль журчит по всей стране и обеспечивает ее всеми необходимыми правилами. Эта парадигматическая страна, в которой жаренные члены предложения залетают прямо в рот.-->
-					<!--							</div>-->
-					<!--						</div>-->
-					<!--						<div class="member-item">-->
-					<!--							<div class="member-item__name">-->
-					<!--								Алексей Синкевич-->
-					<!--								<span class="member-item__date">27 ноября</span>-->
-					<!--							</div>-->
-					<!--							<div class="member-item__info">-->
-					<!--								Однажды одна маленькая строчка рыбного текста по имени Lorem ipsum решила выйти в большой мир грамматики. Великий Оксмокс предупреждал ее о злых запятых, диких знаках вопроса и коварных точках с запятой, но текст не дал сбить себя с толку.-->
-					<!--							</div>-->
-					<!--						</div>-->
-					<!--						<div class="member-item">-->
-					<!--							<div class="member-item__name">-->
-					<!--								Игорь Селиверстов-->
-					<!--								<span class="member-item__date">27 ноября</span>-->
-					<!--							</div>-->
-					<!--							<div class="member-item__info">-->
-					<!--								Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Вдали от всех живут они в буквенных домах на берегу Семантика большого языкового океана.-->
-					<!--							</div>-->
-					<!--						</div>-->
-					<!--					</div>-->
-					<!--					<div class="paging">-->
-					<!--						<a href="#">Пред</a>-->
-					<!--						<a href="#">1</a>-->
-					<!--						<span class="active">2</span>-->
-					<!--						<a href="#">3</a>-->
-					<!--						<span class="etc">...</span>-->
-					<!--						<a href="#">15</a>-->
-					<!--						<a href="#">След</a>-->
-					<!--					</div>-->
+					<?php if(isset($this->params['winners']) && count($this->params['winners']) > 0) { ?>
+
+					<?php } else {?>
+						<div class="no-winners">Объявление первых 30 победителей ー 23 февраля!</div>
+					<?php } ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<a href="#member" class="popup member_click" style="display: none"></a>
+	<div id="member">
+		<a href="#" class="fancy-close"></a>
+		<div class="steps-wrap--member">
+			<div class="member-item">
+				<div class="member-item__name">
+					<span class="member-item__n"></span>
+					<span class="member-item__date">16 фераля</span>
+				</div>
+				<div class="member-item__info">
+					Я хочу танк
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <!-- END POPUP-->
-
+<div class="footer">
+	© 2002—2016 СООО «Мобильные ТелеСистемы». 220043, г. Минск пр. Независимости, 95 Лицензия МСиИ РБ №926 от 30.04.2004, действительна до 30.04.2022 УНП 800013732
+</div>
 <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

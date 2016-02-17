@@ -21,6 +21,7 @@ class GiftController extends BaseController {
 	 * @return bool|string
 	 */
 	public function actionStep1 () {
+//		sleep(10);
 		if (Yii::$app->request->isAjax) {
 			Yii::$app->response->format = Response::FORMAT_JSON;
 

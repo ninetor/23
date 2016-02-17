@@ -42,7 +42,7 @@ class TankForm extends Model {
 			$participant->setAttributes($this->getAttributes());
 
 			if ($participant->save())
-				return true;
+				return $participant->id;
 		}
 		return $this->getErrors();
 	}
